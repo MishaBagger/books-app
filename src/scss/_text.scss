@@ -1,10 +1,64 @@
-.link {
-    font-size: 20px;
-    color: #000000;
+.title {
+    font-size: clamp(1.5rem, 1rem + 1vw, 5rem);
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    line-height: 3em;
+    color: #357a8e;
 
+    @media (max-width: 1192px) {
+        line-height: 2em;
+    }
+}
+.subtitle {
+    font-family: 'Open Sans', sans-serif;
+    font-size: clamp(1rem, 1rem + 0.5vw, 2.5rem);
+    font-weight: bold;
+    line-height: 2em;
+    color: #13353f;
+}
+
+.text {
+    font-family: Raleway;
+    font-size: clamp(1rem, 0.975rem + 0.13vw, 1.5rem);
+    color: #2b1506;
+    line-height: 1.5em;
+}
+
+.link {
+    padding: 20px;
+    margin-inline: 10px;
+    font-size: clamp(1rem, 0.975rem + 0.13vw, 1.5rem);
+    font-family: Raleway;
+    font-weight: 500;
+    color: #fff;
     transition: color 0.5s ease;
 
     &:hover {
         color: #1b32e0;
+    }
+
+    &-header {
+        color: #000;
+    }
+
+    &-footer {
+        padding-inline: 50px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+
+        @media (max-width: 992px) {
+            padding-inline: 25px;
+        }
+        @media (max-width: 768px) {
+            justify-content: center;
+            width: 100%;
+        }
+    }
+
+    &-mobile {
+        font-size: 18px;
+        line-height: 1.5em;
+        color: #fff;
     }
 }
