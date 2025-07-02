@@ -4,10 +4,7 @@ import Mobile from './Mobile'
 import NavLinks from './NavLinks'
 
 export default function Header() {
-    const [isMobile, setIsMobile] = useState(
-        window.visualViewport?.width <= 768 || window.innerWidth <= 768
-    )
-
+    const [isMobile, setIsMobile] = useState(false)
     const [isModal, setIsModal] = useState(false)
 
     function showModal(event) {
@@ -16,30 +13,37 @@ export default function Header() {
     }
 
     useEffect(() => {
-        const handleResize = () => {
-            const viewportWidth =
-                window.visualViewport?.width || window.innerWidth
-            setIsMobile(viewportWidth <= 768)
-        }
+        if (typeof window !== 'undefined') {
+            const handleResize = () => {
+                const viewportWidth = 
+                    window.visualViewport?.width || window.innerWidth
+                setIsMobile(viewportWidth <= 768)
+            }
 
-        window.addEventListener('resize', handleResize)
-        window.visualViewport?.addEventListener('resize', handleResize)
+            handleResize()
 
-        return () => {
-            window.removeEventListener('resize', handleResize)
-            window.visualViewport?.removeEventListener('resize', handleResize)
+            window.addEventListener('resize', handleResize)
+            window.visualViewport?.addEventListener('resize', handleResize)
+
+            return () => {
+                window.removeEventListener('resize', handleResize)
+                window.visualViewport?.removeEventListener('resize', handleResize)
+            }
         }
     }, [])
 
     useEffect(() => {
-        document.body.classList.toggle('modal', isModal === true)
-    }, [showModal])
+        if (typeof document !== 'undefined') {
+            document.body.classList.toggle('modal', isModal)
+        }
+    }, [isModal])
+
     return (
         <header className="header">
             {isMobile ? (
-                <Mobile onClick={showModal} />
+                <Mobile onClick={showModal}/>
             ) : (
-                <NavLinks onClick={showModal} type={'header'}/>
+                <NavLinks onClick={showModal} />
             )}
         </header>
     )

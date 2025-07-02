@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import NavLinks from './NavLinks'
 
-export default function Mobile({ onClick }) {
+export default function Mobile({ onClick, type }) {
     const [isOpen, setIsOpen] = useState(false)
 
     function toggleMenu() {
@@ -34,7 +34,7 @@ export default function Mobile({ onClick }) {
             </label>
             <div id="mobile" className={isOpen === true ? 'open' : ''}>
 
-                <NavLinks onClick={onClick} toggle={hideMenu} isMobile={true} type='header'/>
+                <NavLinks onClick={onClick} toggle={hideMenu} isMobile={true} type={'header'}/>
             </div>
         </div>
     )
