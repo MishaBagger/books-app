@@ -28,16 +28,19 @@ export default function NavLinks({
                     <Link href={'#read'} className="link">
                         Читать
                     </Link>
+                    <Link href={'/cabinet'} className="link">
+                        Кабинет
+                    </Link>
                 </nav>
             )
 
         case 'footer':
             return (
                 <nav className="nav__links nav__links-footer">
-                    <div className="nav__test nav__test-footer">
+                    <div className="nav__wrapper nav__wrapper-footer">
                         <div className="link__container"></div>
                     </div>
-                    <div className="nav__test nav__test-footer">
+                    <div className="nav__wrapper nav__wrapper-footer">
                         <div className="link__container"></div>
                     </div>{' '}
                 </nav>
