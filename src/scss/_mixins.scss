@@ -1,0 +1,26 @@
+@mixin header-background {
+    background-color: #f2e8df;
+}
+
+@mixin about-text-background {
+    // background-color: #F2E8DF;
+    background-color: #FCBF93;
+}
+
+@mixin about-text {
+    color: #FEFEFE;
+    // color: #FB8159;
+}
+
+@mixin book-card-background {
+    background-color: #FB8159;
+}
+
+@mixin book-card-text {
+    // color: #FCBF93;
+    color: #F2E8DF;
+}
+
+@mixin book-card-title {
+    color: #FEFEFE;
+}

@@ -5,4 +5,62 @@
     @media (max-width: 992px) {
         width: 90%;
     }
+
+    &__container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+        overflow: hidden;
+
+        @media (max-width: 1700px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @media (max-width: 1192px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (max-width: 568px) {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+        border-radius: 10px;
+        @include book-card-background;
+
+        @media (max-width: 768px) {
+            max-width: 250px;
+            margin: 0 auto;
+        }
+
+    }
+
+    &__top {
+        height: 100%;
+        width: 100%;
+
+        img {
+            height: 100%;
+            width: 100%;
+            border-radius: 10px;
+            object-fit: contain;
+            object-position: bottom;
+        }
+    }
+
+    &__bottom {
+        height: 100%;
+        padding: 0.5rem;
+    }
+
+    &__buy {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-block: 0.5rem;
+    }
 }

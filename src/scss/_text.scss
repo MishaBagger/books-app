@@ -1,27 +1,50 @@
 .title {
     font-size: clamp(1.5rem, 1rem + 1vw, 5rem);
-    font-family: 'Open Sans', sans-serif;
-    font-weight: bold;
+    font-family: var(--font-prata);
     line-height: 3em;
-    color: #000;
+    color: #fb8159;
 
     @media (max-width: 1192px) {
         line-height: 2em;
     }
+
+    &--book {
+        font-family: var(--font-jost);
+        font-weight: 500;
+        font-size: clamp(1rem, 0.6rem + 0.5vw, 1.5rem);
+        line-height: 1.5em;
+        text-align: center;
+        @include book-card-title;
+    }
 }
 .subtitle {
-    font-family: 'Open Sans', sans-serif;
+    font-family: var(--font-prata);
     font-size: clamp(1rem, 1rem + 0.5vw, 2.5rem);
-    font-weight: bold;
     line-height: 2em;
     color: #13353f;
 }
 
 .text {
-    font-family: Raleway;
-    font-size: clamp(0.75rem, 0.75rem + 0.4vw, 1.25rem);
+    font-family: var(--font-jost);
+    font-size: clamp(1rem, 0.75rem + 0.4vw, 1.25rem);
     color: #2b1506;
     line-height: 1.5em;
+
+    &--about {
+        @include about-text;
+    }
+
+    &--book {
+        font-size: clamp(0.75rem, 0.5rem + 0.1vw, 1.25rem);
+        @include book-card-text;
+    }
+
+    &--buy {
+        font-size: clamp(0.75rem, 0.75rem + 0.1vw, 1.25rem);
+        line-height: 1.5em;
+        font-weight: bold;
+        @include book-card-title;
+    }
 }
 
 .link {
@@ -35,8 +58,13 @@
         color: #1b32e0;
     }
 
-    &-header {
-        color: #000;
+    &--header {
+        color: #fb8159;
+        font-weight: 500;
+
+        &:hover {
+            color: #415111;
+        }
     }
 
     &-footer {
@@ -58,5 +86,17 @@
         font-size: 18px;
         line-height: 1.5em;
         color: #fff;
+    }
+
+    &--book {
+        font-size: clamp(0.75rem, 0.5rem + 0.1vw, 1.25rem);
+        font-weight: bold;
+        padding: 0;
+        margin: 0;
+        @include book-card-text;
+
+        &:hover {
+            color: #fcbf93;
+        }
     }
 }

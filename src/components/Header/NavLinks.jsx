@@ -16,19 +16,19 @@ export default function NavLinks({
                             : 'header__container'
                     }
                 >
-                    <Link href={'/'} className="link">
+                    <Link href={'/'} className="link link--header">
                         Главная
                     </Link>
-                    <Link href={'#about'} className="link">
+                    <Link href={'#about'} className="link link--header">
                         Обо мне
                     </Link>
-                    <Link href={'#stories'} className="link">
+                    <Link href={'#stories'} className="link link--header">
                         Рассказы
                     </Link>
-                    <Link href={'#read'} className="link">
+                    <Link href={'#read'} className="link link--header">
                         Читать
                     </Link>
-                    <Link href={'/cabinet'} className="link">
+                    <Link href={'/cabinet'} className="link link--header">
                         Кабинет
                     </Link>
                 </nav>
