@@ -11,17 +11,19 @@ export default function Book({ book }) {
                 <p className="text text--book">{book.description}</p>
                 <p className="text text--buy">Купить книгу:</p>
                 <div className="books__buy">
-                    {useBooks(book.links).map(({ platform, url, displayName }) => (
-                        <a
-                            key={platform}
-                            href={url}
-                            className="link link--book"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            {displayName}
-                        </a>
-                    ))}
+                    {useBooks(book.links).map(
+                        ({ platform, url, displayName }) => (
+                            <a
+                                key={platform}
+                                href={url}
+                                className="link link--book"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                {displayName}
+                            </a>
+                        )
+                    )}
                 </div>
             </div>
         </div>

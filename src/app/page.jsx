@@ -11,7 +11,7 @@ export default function Home() {
             <Main>
                 <Banner />
                 <About />
-                <Books/>
+                <Books />
             </Main>
         </>
     )
