@@ -55,11 +55,11 @@
     transition: color 0.5s ease;
 
     &:hover {
-        color: #1b32e0;
+        @include text-orange;
     }
 
     &--header {
-        color: #fb8159;
+        @include text-orange;
         font-weight: 500;
 
         &:hover {
@@ -96,7 +96,13 @@
         @include book-card-text;
 
         &:hover {
-            color: #fcbf93;
+            @include text-light-orange;
         }
+    }
+
+    &--found {
+        @include text-light-orange;
+        margin: 0;
+        padding: 0;
     }
 }

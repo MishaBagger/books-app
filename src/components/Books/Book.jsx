@@ -9,6 +9,7 @@ export default function Book({ book }) {
             <div className="books__bottom">
                 <h3 className="title title--book">{book.name}</h3>
                 <p className="text text--book">{book.description}</p>
+                <p className="text text--book">{new Date(book.date).toLocaleDateString('ru-RU')}</p>
                 <p className="text text--buy">Купить книгу:</p>
                 <div className="books__buy">
                     {useBooks(book.links).map(

@@ -230,10 +230,10 @@ h1 {
   transition: color 0.5s ease;
 }
 .link:hover {
-  color: #1b32e0;
+  color: #FB8159;
 }
 .link--header {
-  color: #fb8159;
+  color: #FB8159;
   font-weight: 500;
 }
 .link--header:hover {
@@ -269,7 +269,12 @@ h1 {
   color: #F2E8DF;
 }
 .link--book:hover {
-  color: #fcbf93;
+  color: #FCBF93;
+}
+.link--found {
+  color: #FCBF93;
+  margin: 0;
+  padding: 0;
 }
 
 .mobileMenu {
@@ -557,6 +562,35 @@ body.mobile {
   .books {
     width: 90%;
   }
+}
+.books__filters {
+  width: 100%;
+  display: flex;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+.books__filters > input, .books__filters > select {
+  background-color: #FCBF93;
+  color: #FEFEFE;
+  font-family: var(--font-jost);
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  outline: none;
+}
+.books__filters > input::-moz-placeholder, .books__filters > select::-moz-placeholder {
+  color: #FEFEFE;
+}
+.books__filters > input::placeholder, .books__filters > select::placeholder {
+  color: #FEFEFE;
+}
+.books__filters > input::-webkit-search-cancel-button, .books__filters > select::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1rem;
+  height: 1rem;
+  background: linear-gradient(45deg, transparent calc(50% - 1px), #FEFEFE calc(50% - 1px), #FEFEFE calc(50% + 1px), transparent calc(50% + 1px)), linear-gradient(-45deg, transparent calc(50% - 1px), #FEFEFE calc(50% - 1px), #FEFEFE calc(50% + 1px), transparent calc(50% + 1px));
+  background-size: 100% 100%;
+  cursor: pointer;
 }
 .books__container {
   display: grid;
