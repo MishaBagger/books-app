@@ -29,7 +29,6 @@ export const booksSlice = createSlice({
         },
         sortBooks: (state, action) => {
             state.sortType = action.payload
-
             sorting(state)
         },
     },

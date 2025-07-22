@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import Book from './Book'
 import { books as booksData } from '@/data/books'
@@ -8,17 +8,34 @@ import useDebounce from '@/hooks/useDebounce'
 
 export default function Books() {
     const [searchTerm, setSearchTerm] = useState('')
+    const [sortType, setSortType] = useState('date')
     const { filteredBooks } = useSelector((state) => state.books)
     const { getBooks, searchBooks, sortBooks } = useActions()
     const debouncedSearch = useDebounce(searchBooks, 300)
+    const stableDebouncedSearch = useMemo(
+        () => debouncedSearch,
+        [debouncedSearch]
+    )
+
+    const stableSort = useCallback((type) => sortBooks(type), [sortBooks])
 
     useEffect(() => {
         getBooks(booksData)
     }, [])
 
     useEffect(() => {
-        debouncedSearch(searchTerm)
-    }, [searchTerm])
+        stableSort(sortType)
+    }, [sortType, stableSort])
+
+    useEffect(() => {
+        stableDebouncedSearch(searchTerm)
+        return () => stableDebouncedSearch.cancel?.()
+    }, [searchTerm, stableDebouncedSearch])
+
+    const renderedBooks = useMemo(
+        () => filteredBooks.map((book) => <Book key={book.name} book={book} />),
+        [filteredBooks]
+    )
 
     return (
         <section className="books">
@@ -29,21 +46,22 @@ export default function Books() {
                     placeholder="Поиск"
                     value={searchTerm}
                     onInput={(e) => setSearchTerm(e.target.value)}
+                    aria-label="Поиск книг"
                 />
                 <select
                     name="books__select"
                     id="books__select"
-                    defaultValue={'date'}
-                    onChange={(e) => sortBooks(e.target.value)}
+                    value={sortType}
+                    onChange={(e) => setSortType(e.target.value)}
+                    aria-label="Сортировка книг"
                 >
                     <option value="date">Сортировать по новым</option>
                     <option value="desc">Сортировать по алфавиту</option>
                 </select>
             </div>
             <div className="books__container">
-                {filteredBooks.length > 0 
-                ? (filteredBooks.map(book => <Book key={book.name} book={book} />
-                    )
+                {filteredBooks.length > 0 ? (
+                    renderedBooks
                 ) : (
                     <p className="text">
                         Книги не найдены, возможно они есть на{' '}
@@ -52,7 +70,9 @@ export default function Books() {
                             className="link link--found"
                             target="_blank"
                             rel="noopener noreferrer"
-                        >Литрес</a>
+                        >
+                            Литрес
+                        </a>
                     </p>
                 )}
             </div>
