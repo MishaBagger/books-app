@@ -11,7 +11,7 @@
     &--book {
         font-family: var(--font-jost);
         font-weight: 500;
-        font-size: clamp(1rem, 0.6rem + 0.5vw, 1.5rem);
+        font-size: clamp(0.75rem, 0.6rem + 0.5vw, 1.5rem);
         line-height: 1.5em;
         text-align: center;
         @include book-card-title;
@@ -25,7 +25,7 @@
 
 .text {
     font-family: var(--font-jost);
-    font-size: clamp(1rem, 0.75rem + 0.4vw, 1.25rem);
+    font-size: clamp(0.75rem, 0.75rem + 0.4vw, 1.25rem);
     line-height: 1.5em;
 
     &--about {
@@ -33,12 +33,12 @@
     }
 
     &--book {
-        font-size: clamp(0.75rem, 0.5rem + 0.1vw, 1.25rem);
+        font-size: clamp(0.5rem, 0.5rem + 0.3vw, 1.25rem);
         @include book-card-text;
     }
 
     &--buy {
-        font-size: clamp(0.75rem, 0.75rem + 0.2vw, 1.25rem);
+        font-size: clamp(0.75rem, 0.5rem + 0.4vw, 1.25rem);
         line-height: 1.5em;
         font-weight: bold;
         @include book-card-title;
@@ -47,13 +47,26 @@
     &--first {
         font-family: inherit;
         color: #fff;
-        font-size: clamp(1rem, 1rem + .5vw, 5rem);
+        font-size: clamp(1rem, 1rem + 0.5vw, 5rem);
+    }
+
+    &--copy {
+        text-align: center;
+        font-size: clamp(0.75rem, 0.5rem + 0.5vw, 1rem);
+        line-height: 2em;
+        @include text-orange;
+        cursor: default;
+        transition: color 0.5s ease;
+
+        &:hover {
+            @include text-accent;
+        }
     }
 }
 
 .link {
-    padding: 20px;
-    margin-inline: 10px;
+    padding: 1rem;
+    margin-inline: 0.5rem;
     font-size: clamp(1rem, 0.975rem + 0.13vw, 1.25rem);
     color: #fff;
     transition: color 0.5s ease;
@@ -62,27 +75,16 @@
         @include text-orange;
     }
 
-    &--header {
+    &--nav {
         @include text-orange;
         font-weight: 500;
 
         &:hover {
             @include text-accent;
         }
-    }
 
-    &-footer {
-        padding-inline: 50px;
-        color: #fff;
-        display: flex;
-        align-items: center;
-
-        @media (max-width: 992px) {
-            padding-inline: 25px;
-        }
         @media (max-width: 768px) {
-            justify-content: center;
-            width: 100%;
+            padding: 0.5rem;
         }
     }
 
@@ -93,7 +95,7 @@
     }
 
     &--book {
-        font-size: clamp(0.75rem, 0.75rem + 0.2vw, 1.25rem);
+        font-size: clamp(0.75rem, 0.5rem + 0.4vw, 1.25rem);
         font-weight: bold;
         padding: 0;
         margin: 0;
@@ -115,5 +117,4 @@
             @include text-accent;
         }
     }
-
 }

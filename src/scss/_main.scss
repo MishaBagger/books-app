@@ -1,10 +1,15 @@
 .main {
-    padding-top: 5rem;
+    padding-block: 5rem;
     max-width: 1920px;
+    margin: 0 auto;
 
     & > * {
         width: 70%;
         margin: 0 auto;
+
+        @media (max-width: 992px) {
+            width: 90%;
+        }
     }
 
     & > *:first-child {

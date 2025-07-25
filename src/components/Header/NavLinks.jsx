@@ -16,19 +16,19 @@ export default function NavLinks({
                             : 'header__container'
                     }
                 >
-                    <Link href={'/'} className="link link--header">
+                    <Link href={'/'} className="link link--nav">
                         Главная
                     </Link>
-                    <Link href={'#about'} className="link link--header">
+                    <Link href={'#about'} className="link link--nav">
                         Обо мне
                     </Link>
-                    <Link href={'#books'} className="link link--header">
+                    <Link href={'#books'} className="link link--nav">
                         Книги
                     </Link>
-                    <Link href={'#read'} className="link link--header">
+                    <Link href={'#read'} className="link link--nav">
                         Читать
                     </Link>
-                    <Link href={'/cabinet'} className="link link--header">
+                    <Link href={'/cabinet'} className="link link--nav">
                         Кабинет
                     </Link>
                 </nav>
@@ -36,13 +36,22 @@ export default function NavLinks({
 
         case 'footer':
             return (
-                <nav className="nav__links nav__links-footer">
-                    <div className="nav__wrapper nav__wrapper-footer">
-                        <div className="link__container"></div>
-                    </div>
-                    <div className="nav__wrapper nav__wrapper-footer">
-                        <div className="link__container"></div>
-                    </div>{' '}
+                <nav className="footer__nav">
+                    <Link href={'/'} className="link link--nav">
+                        Главная
+                    </Link>
+                    <Link href={'#about'} className="link link--nav">
+                        Обо мне
+                    </Link>
+                    <Link href={'#books'} className="link link--nav">
+                        Книги
+                    </Link>
+                    <Link href={'#read'} className="link link--nav">
+                        Читать
+                    </Link>
+                    <Link href={'/cabinet'} className="link link--nav">
+                        Кабинет
+                    </Link>
                 </nav>
             )
         default:
