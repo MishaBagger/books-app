@@ -3,6 +3,7 @@ import Banner from '@/components/Banner/Banner'
 import Main from '@/components/Main/Main'
 import About from '@/components/About/About'
 import Books from '@/components/Books/Books'
+import Read from '@/components/Read/Read'
 
 export default function Home() {
     return (
@@ -12,6 +13,7 @@ export default function Home() {
                 <Banner />
                 <About />
                 <Books />
+                <Read />
             </Main>
         </>
     )

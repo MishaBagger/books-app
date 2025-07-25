@@ -1,5 +1,13 @@
 .main {
     padding-top: 5rem;
     max-width: 1920px;
-    margin: 0 auto;
+
+    & > * {
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    & > *:first-child {
+        width: 100%;
+    }
 }

@@ -1,6 +1,4 @@
 .about {
-    width: 70%;
-    margin: 0 auto;
     padding-block: 1rem;
 
     &__container {
@@ -13,11 +11,12 @@
         flex: 1 1 50%;
         min-width: 0;
         @include about-text-background;
-        border-radius: 15px;
+        border-radius: .75rem;
         padding: .5rem 1rem;
+        
 
         .text {
-            padding-block: 5px;
+            padding-block: .25rem;
 
             @media (max-width: 1700px) {
                 font-size: 1.2vw;

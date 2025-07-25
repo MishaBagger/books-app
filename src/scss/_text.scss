@@ -21,13 +21,11 @@
     font-family: var(--font-prata);
     font-size: clamp(1rem, 1rem + 0.5vw, 2.5rem);
     line-height: 2em;
-    color: #13353f;
 }
 
 .text {
     font-family: var(--font-jost);
     font-size: clamp(1rem, 0.75rem + 0.4vw, 1.25rem);
-    color: #2b1506;
     line-height: 1.5em;
 
     &--about {
@@ -40,10 +38,16 @@
     }
 
     &--buy {
-        font-size: clamp(0.75rem, 0.75rem + 0.1vw, 1.25rem);
+        font-size: clamp(0.75rem, 0.75rem + 0.2vw, 1.25rem);
         line-height: 1.5em;
         font-weight: bold;
         @include book-card-title;
+    }
+
+    &--first {
+        font-family: inherit;
+        color: #fff;
+        font-size: clamp(1rem, 1rem + .5vw, 5rem);
     }
 }
 
@@ -63,7 +67,7 @@
         font-weight: 500;
 
         &:hover {
-            color: #415111;
+            @include text-accent;
         }
     }
 
@@ -89,20 +93,27 @@
     }
 
     &--book {
-        font-size: clamp(0.75rem, 0.5rem + 0.1vw, 1.25rem);
+        font-size: clamp(0.75rem, 0.75rem + 0.2vw, 1.25rem);
         font-weight: bold;
         padding: 0;
         margin: 0;
-        @include book-card-text;
+        @include book-card-title;
 
         &:hover {
-            @include text-light-orange;
+            @include text-accent;
         }
     }
 
-    &--found {
+    &--accent {
         @include text-light-orange;
         margin: 0;
         padding: 0;
     }
+
+    &--read {
+        &:hover {
+            @include text-accent;
+        }
+    }
+
 }

@@ -39,7 +39,7 @@ export default function Books() {
 
     return (
         <section className="books">
-            <h1 className="title">Мои книги</h1>
+            <h2 className="title">Мои книги</h2>
             <div className="books__filters">
                 <input
                     type="search"
@@ -67,7 +67,7 @@ export default function Books() {
                         Книги не найдены, возможно они есть на{' '}
                         <a
                             href="https://www.litres.ru/author/natalya-kalinina-12456612"
-                            className="link link--found"
+                            className="link link--accent"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
@@ -75,6 +75,9 @@ export default function Books() {
                         </a>
                     </p>
                 )}
+            </div>
+            <div className="books__next">
+                <button className="books__next__button">Загрузить ещё</button>
             </div>
         </section>
     )

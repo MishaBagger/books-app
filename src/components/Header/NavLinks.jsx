@@ -22,8 +22,8 @@ export default function NavLinks({
                     <Link href={'#about'} className="link link--header">
                         Обо мне
                     </Link>
-                    <Link href={'#stories'} className="link link--header">
-                        Рассказы
+                    <Link href={'#books'} className="link link--header">
+                        Книги
                     </Link>
                     <Link href={'#read'} className="link link--header">
                         Читать

@@ -1,7 +1,4 @@
 .books {
-    width: 70%;
-    margin: 0 auto;
-
     @media (max-width: 992px) {
         width: 90%;
     }
@@ -32,15 +29,15 @@
                 background: linear-gradient(
                         45deg,
                         transparent calc(50% - 1px),
-                        #FEFEFE calc(50% - 1px),
-                        #FEFEFE calc(50% + 1px),
+                        #fefefe calc(50% - 1px),
+                        #fefefe calc(50% + 1px),
                         transparent calc(50% + 1px)
                     ),
                     linear-gradient(
                         -45deg,
                         transparent calc(50% - 1px),
-                        #FEFEFE calc(50% - 1px),
-                        #FEFEFE calc(50% + 1px),
+                        #fefefe calc(50% - 1px),
+                        #fefefe calc(50% + 1px),
                         transparent calc(50% + 1px)
                     );
                 background-size: 100% 100%;
@@ -87,7 +84,7 @@
         img {
             height: 100%;
             width: 100%;
-            border-radius: 10px;
+            border-radius: .5rem .5rem 0 0;
             object-fit: contain;
             object-position: bottom;
         }
@@ -99,10 +96,35 @@
     }
 
     &__buy {
+        height: 100%;
+        padding: 0 0.5rem;
+        border-radius: 0 0 0.5rem 0.5rem;
+        background-color: #fcbf93;
+        &__container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: .5rem 1rem;
+            margin-block: 0.5rem;
+        }
+    }
+
+    &__next {
         display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        margin-block: 0.5rem;
+        justify-content: center;
+
+        &__button {
+            font-family: var(--font-jost);
+            margin-block: 1rem;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            @include about-text-background;
+            @include about-text;
+            transition: background-color 0.2s ease-in-out;
+
+            &:hover {
+                @include book-card-background;
+            }
+        }
     }
 }
