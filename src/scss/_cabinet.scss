@@ -1,0 +1,111 @@
+.cabinet {
+    width: 100%;
+    height: 100vh;
+
+    &__container {
+        width: 50%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+
+        & > form {
+            display: flex;
+            flex-direction: column;
+            border-radius: 0.5rem;
+
+            & > input::placeholder {
+                color: #c45c34;
+            }
+        }
+
+        @media (max-width: 992px) {
+            width: 70%;
+        }
+
+        @media (max-width: 568px) {
+            width: 100%;
+        }
+    }
+
+    &__register {
+        width: 70%;
+        height: 100%;
+        padding: 1rem;
+        @include book-card-background;
+
+        &--input {
+            border-radius: 0.5rem;
+            margin-block: 0.5rem;
+            padding: 0.5rem;
+            @include about-text-background;
+            @include input-text;
+        }
+
+        @media (max-width: 768px) {
+            width: 90%;
+        }
+    }
+
+    &__legend {
+        font-size: clamp(1rem, 1rem + 0.5vw, 2.5rem);
+        text-align: center;
+        @include about-text;
+        @include prata;
+    }
+
+    &__error {
+        @include input-error;
+        height: 1.2em;
+        transition: opacity 0.3s ease;
+
+        &[aria-hidden='false'] {
+            opacity: 1;
+        }
+
+        &[aria-hidden='true'] {
+            opacity: 0;
+        }
+    }
+
+    &__button {
+        margin: 0.5rem auto;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        color: #fefefe;
+        background-color: #fcbf93;
+        font-family: var(--font-jost);
+        font-size: clamp(0.75rem, 0.75rem + 0.4vw, 1.25rem);
+        transition: all 0.5s ease;
+
+        &:hover {
+            color: #fcbf93;
+            background-color: #c45c34;
+        }
+    }
+
+    &__checkbox {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        color: #f2e8df;
+        font-size: clamp(0.75rem, 0.75rem + 0.2vw, 1.25rem);
+        gap: 1rem;
+        padding-block: 0.5rem;
+
+        & > input[type='checkbox'] {
+            margin: 0;
+            width: 1rem;
+            height: 1rem;
+        }
+    }
+
+    &__swap {
+        font-size: clamp(0.75rem, 0.75rem + 0.2vw, 1.25rem);
+        color: #f2e8df;
+
+        & > span {
+            cursor: pointer;
+            color: #fefefe;
+        }
+    }
+}

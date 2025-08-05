@@ -15,7 +15,7 @@ export default function Header() {
     useEffect(() => {
         if (typeof window !== 'undefined') {
             const handleResize = () => {
-                const viewportWidth = 
+                const viewportWidth =
                     window.visualViewport?.width || window.innerWidth
                 setIsMobile(viewportWidth <= 768)
             }
@@ -27,7 +27,10 @@ export default function Header() {
 
             return () => {
                 window.removeEventListener('resize', handleResize)
-                window.visualViewport?.removeEventListener('resize', handleResize)
+                window.visualViewport?.removeEventListener(
+                    'resize',
+                    handleResize
+                )
             }
         }
     }, [])
@@ -41,7 +44,7 @@ export default function Header() {
     return (
         <header className="header">
             {isMobile ? (
-                <Mobile onClick={showModal}/>
+                <Mobile onClick={showModal} />
             ) : (
                 <NavLinks onClick={showModal} />
             )}

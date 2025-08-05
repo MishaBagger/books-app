@@ -192,7 +192,7 @@ h1 {
   font-size: clamp(0.75rem, 0.6rem + 0.5vw, 1.5rem);
   line-height: 1.5em;
   text-align: center;
-  color: #FEFEFE;
+  color: #fefefe;
 }
 
 .subtitle {
@@ -207,17 +207,17 @@ h1 {
   line-height: 1.5em;
 }
 .text--about {
-  color: #FEFEFE;
+  color: #fefefe;
 }
 .text--book {
   font-size: clamp(0.5rem, 0.5rem + 0.3vw, 1.25rem);
-  color: #F2E8DF;
+  color: #f2e8df;
 }
 .text--buy {
   font-size: clamp(0.75rem, 0.5rem + 0.4vw, 1.25rem);
   line-height: 1.5em;
   font-weight: bold;
-  color: #FEFEFE;
+  color: #fefefe;
 }
 .text--first {
   font-family: inherit;
@@ -228,30 +228,30 @@ h1 {
   text-align: center;
   font-size: clamp(0.75rem, 0.5rem + 0.5vw, 1rem);
   line-height: 2em;
-  color: #FB8159;
+  color: #fb8159;
   cursor: default;
   transition: color 0.5s ease;
 }
 .text--copy:hover {
-  color: #C45C34;
+  color: #c45c34;
 }
 
 .link {
   padding: 1rem;
   margin-inline: 0.5rem;
-  font-size: clamp(1rem, 0.975rem + 0.13vw, 1.25rem);
+  font-size: clamp(0.75rem, 0.9rem + 0.1vw, 1.25rem);
   color: #fff;
   transition: color 0.5s ease;
 }
 .link:hover {
-  color: #FB8159;
+  color: #fb8159;
 }
 .link--nav {
-  color: #FB8159;
+  color: #fb8159;
   font-weight: 500;
 }
 .link--nav:hover {
-  color: #C45C34;
+  color: #c45c34;
 }
 @media (max-width: 768px) {
   .link--nav {
@@ -268,18 +268,18 @@ h1 {
   font-weight: bold;
   padding: 0;
   margin: 0;
-  color: #FEFEFE;
+  color: #fefefe;
 }
 .link--book:hover {
-  color: #C45C34;
+  color: #c45c34;
 }
 .link--accent {
-  color: #FCBF93;
+  color: #fcbf93;
   margin: 0;
   padding: 0;
 }
 .link--read:hover {
-  color: #C45C34;
+  color: #c45c34;
 }
 
 .mobileMenu {
@@ -316,7 +316,7 @@ h1 {
     width: 100%;
     height: 3px;
     transition: all 0.3s ease;
-    background-color: #FB8159;
+    background-color: #fb8159;
   }
   .burger__label::before {
     content: "";
@@ -332,17 +332,17 @@ h1 {
   #burger-toggle:checked ~ .burger__label::after {
     transform: rotate(45deg);
     bottom: 10px;
-    background-color: #FB8159;
+    background-color: #fb8159;
   }
   #burger-toggle:checked ~ .burger__label::before {
     transform: rotate(-45deg);
     top: 12px;
-    background-color: #FB8159;
+    background-color: #fb8159;
   }
   #burger-toggle:checked ~ .burger__label span {
     transform: rotate(-45deg);
     top: 12px;
-    background-color: #FB8159;
+    background-color: #fb8159;
   }
 }
 #mobile {
@@ -469,7 +469,7 @@ body.mobile {
 .about__text {
   flex: 1 1 50%;
   min-width: 0;
-  background-color: #FCBF93;
+  background-color: #fcbf93;
   border-radius: 0.75rem;
   padding: 0.5rem 1rem;
 }
@@ -539,18 +539,18 @@ body.mobile {
   gap: 1rem;
 }
 .books__filters > input, .books__filters > select {
-  background-color: #FCBF93;
-  color: #FEFEFE;
+  background-color: #fcbf93;
+  color: #fefefe;
   font-family: var(--font-jost);
   padding: 0.5rem;
   border-radius: 0.3rem;
   outline: none;
 }
 .books__filters > input::-moz-placeholder, .books__filters > select::-moz-placeholder {
-  color: #FEFEFE;
+  color: #fefefe;
 }
 .books__filters > input::placeholder, .books__filters > select::placeholder {
-  color: #FEFEFE;
+  color: #fefefe;
 }
 .books__filters > input::-webkit-search-cancel-button, .books__filters > select::-webkit-search-cancel-button {
   -webkit-appearance: none;
@@ -586,7 +586,7 @@ body.mobile {
   display: flex;
   flex-direction: column;
   border-radius: 0.5rem;
-  background-color: #FB8159;
+  background-color: #fb8159;
 }
 @media (max-width: 768px) {
   .books__wrapper {
@@ -633,12 +633,12 @@ body.mobile {
   margin-block: 1rem;
   padding: 0.5rem;
   border-radius: 0.5rem;
-  background-color: #FCBF93;
-  color: #FEFEFE;
+  background-color: #fcbf93;
+  color: #fefefe;
   transition: background-color 0.2s ease-in-out;
 }
 .books__next__button:hover {
-  background-color: #FB8159;
+  background-color: #fb8159;
 }
 
 .read {
@@ -649,7 +649,7 @@ body.mobile {
   height: 100%;
   padding: 1rem;
   border-radius: 0.75rem;
-  background-color: #FB8159;
+  background-color: #fb8159;
 }
 .read__container .text {
   padding-block: 0.25rem;
@@ -694,4 +694,111 @@ body.mobile {
   .footer__contacts {
     flex-direction: column;
   }
+}
+
+.cabinet {
+  width: 100%;
+  height: 100vh;
+}
+.cabinet__container {
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+.cabinet__container > form {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem;
+}
+.cabinet__container > form > input::-moz-placeholder {
+  color: #c45c34;
+}
+.cabinet__container > form > input::placeholder {
+  color: #c45c34;
+}
+@media (max-width: 992px) {
+  .cabinet__container {
+    width: 70%;
+  }
+}
+@media (max-width: 568px) {
+  .cabinet__container {
+    width: 100%;
+  }
+}
+.cabinet__register {
+  width: 70%;
+  height: 100%;
+  padding: 1rem;
+  background-color: #fb8159;
+}
+.cabinet__register--input {
+  border-radius: 0.5rem;
+  margin-block: 0.5rem;
+  padding: 0.5rem;
+  background-color: #fcbf93;
+  color: #fefefe;
+  font-family: var(--font-jost);
+  font-size: clamp(0.75rem, 0.75rem + 0.4vw, 1.25rem);
+}
+@media (max-width: 768px) {
+  .cabinet__register {
+    width: 90%;
+  }
+}
+.cabinet__legend {
+  font-size: clamp(1rem, 1rem + 0.5vw, 2.5rem);
+  text-align: center;
+  color: #fefefe;
+  font-family: var(--font-prata);
+}
+.cabinet__error {
+  color: #f2e8df;
+  font-family: var(--font-jost);
+  font-size: clamp(0.75rem, 0.75rem + 0.1vw, 1.25rem);
+  height: 1.2em;
+  transition: opacity 0.3s ease;
+}
+.cabinet__error[aria-hidden=false] {
+  opacity: 1;
+}
+.cabinet__error[aria-hidden=true] {
+  opacity: 0;
+}
+.cabinet__button {
+  margin: 0.5rem auto;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  color: #fefefe;
+  background-color: #fcbf93;
+  font-family: var(--font-jost);
+  font-size: clamp(0.75rem, 0.75rem + 0.4vw, 1.25rem);
+  transition: all 0.5s ease;
+}
+.cabinet__button:hover {
+  color: #fcbf93;
+  background-color: #c45c34;
+}
+.cabinet__checkbox {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  color: #f2e8df;
+  font-size: clamp(0.75rem, 0.75rem + 0.2vw, 1.25rem);
+  gap: 1rem;
+  padding-block: 0.5rem;
+}
+.cabinet__checkbox > input[type=checkbox] {
+  margin: 0;
+  width: 1rem;
+  height: 1rem;
+}
+.cabinet__swap {
+  font-size: clamp(0.75rem, 0.75rem + 0.2vw, 1.25rem);
+  color: #f2e8df;
+}
+.cabinet__swap > span {
+  cursor: pointer;
+  color: #fefefe;
 }/*# sourceMappingURL=style.css.map */

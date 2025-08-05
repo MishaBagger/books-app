@@ -5,11 +5,16 @@ import Book from './Book'
 import { books as booksData } from '@/data/books'
 import { useActions } from '@/hooks/useActions'
 import useDebounce from '@/hooks/useDebounce'
+import { useGetBooksQuery } from '@/lib/api/books.api'
+import CreateBook from './CreateBook'
 
 export default function Books() {
     const [searchTerm, setSearchTerm] = useState('')
     const [sortType, setSortType] = useState('date')
     const { filteredBooks } = useSelector((state) => state.books)
+
+    const { data: dataBooks, error, isLoading } = useGetBooksQuery()
+
     const { getBooks, searchBooks, sortBooks } = useActions()
     const debouncedSearch = useDebounce(searchBooks, 300)
     const stableDebouncedSearch = useMemo(
@@ -60,23 +65,10 @@ export default function Books() {
                 </select>
             </div>
             <div className="books__container">
-                {filteredBooks.length > 0 ? (
-                    renderedBooks
-                ) : (
-                    <p className="text">
-                        Книги не найдены, возможно они есть на{' '}
-                        <a
-                            href="https://www.litres.ru/author/natalya-kalinina-12456612"
-                            className="link link--accent"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            Литрес
-                        </a>
-                    </p>
-                )}
+                {isLoading ? <div>Loading</div> : renderedBooks}
             </div>
             <div className="books__next">
+                <CreateBook />
                 <button className="books__next__button">Загрузить ещё</button>
             </div>
         </section>

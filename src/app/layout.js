@@ -1,6 +1,9 @@
 import { Lora, Jost, Prata } from 'next/font/google'
 import '../scss/style.css'
 import StoreProvider from './StoreProvider'
+import Header from '@/components/Header/Header'
+import Footer from '@/components/Footer/Footer'
+import Main from '@/components/Main/Main'
 
 const LoraFont = Lora({
     variable: '--font-lora',
@@ -30,7 +33,12 @@ export default function RootLayout({ children }) {
             <body
                 className={`${LoraFont.variable} ${JostFont.variable} ${PrataFont.variable}`}
             >
-                <StoreProvider>{children}</StoreProvider>
+                <StoreProvider>
+                    <Header />
+                    <Main>{children}</Main>
+
+                    <Footer />
+                </StoreProvider>
             </body>
         </html>
     )

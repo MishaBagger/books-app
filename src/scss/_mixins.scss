@@ -4,35 +4,50 @@
 
 @mixin about-text-background {
     // background-color: #F2E8DF;
-    background-color: #FCBF93;
+    background-color: #fcbf93;
 }
 
 @mixin about-text {
-    color: #FEFEFE;
+    color: #fefefe;
     // color: #FB8159;
 }
 
 @mixin book-card-background {
-    background-color: #FB8159;
+    background-color: #fb8159;
 }
 
 @mixin book-card-text {
     // color: #FCBF93;
-    color: #F2E8DF;
+    color: #f2e8df;
 }
 
 @mixin book-card-title {
-    color: #FEFEFE;
+    color: #fefefe;
 }
 
 @mixin text-orange {
-    color: #FB8159;
+    color: #fb8159;
 }
 
 @mixin text-light-orange {
-    color: #FCBF93;
+    color: #fcbf93;
 }
 
 @mixin text-accent {
-    color: #C45C34;
+    color: #c45c34;
+}
+
+@mixin prata {
+    font-family: var(--font-prata);
+}
+
+@mixin input-text {
+    color: #fefefe;
+    font-family: var(--font-jost);
+    font-size: clamp(0.75rem, 0.75rem + 0.4vw, 1.25rem);
+}
+@mixin input-error {
+    color: #f2e8df;
+    font-family: var(--font-jost);
+    font-size: clamp(0.75rem, 0.75rem + 0.1vw, 1.25rem);
 }
