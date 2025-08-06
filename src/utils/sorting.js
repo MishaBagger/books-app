@@ -1,4 +1,5 @@
 export default function sorting(state) {
+    if (!state.filteredBooks || !state.allBooks) return
     switch (state.sortType) {
         case 'date':
             state.filteredBooks = [...state.filteredBooks].sort(

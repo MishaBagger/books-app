@@ -2,18 +2,17 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import Book from './Book'
-import { books as booksData } from '@/data/books'
 import { useActions } from '@/hooks/useActions'
 import useDebounce from '@/hooks/useDebounce'
 import { useGetBooksQuery } from '@/lib/api/books.api'
-import CreateBook from './CreateBook'
+import BookLoader from './BookLoader'
 
 export default function Books() {
     const [searchTerm, setSearchTerm] = useState('')
     const [sortType, setSortType] = useState('date')
     const { filteredBooks } = useSelector((state) => state.books)
 
-    const { data: dataBooks, error, isLoading } = useGetBooksQuery()
+    const { data: dataBooks, isError, isLoading } = useGetBooksQuery()
 
     const { getBooks, searchBooks, sortBooks } = useActions()
     const debouncedSearch = useDebounce(searchBooks, 300)
@@ -25,7 +24,7 @@ export default function Books() {
     const stableSort = useCallback((type) => sortBooks(type), [sortBooks])
 
     useEffect(() => {
-        getBooks(booksData)
+        getBooks(dataBooks)
     }, [])
 
     useEffect(() => {
@@ -37,10 +36,23 @@ export default function Books() {
         return () => stableDebouncedSearch.cancel?.()
     }, [searchTerm, stableDebouncedSearch])
 
-    const renderedBooks = useMemo(
-        () => filteredBooks.map((book) => <Book key={book.name} book={book} />),
-        [filteredBooks]
-    )
+    const renderedBooks = useMemo(() => {
+        return filteredBooks?.length ? (
+            filteredBooks.map((book) => <Book key={book.id} book={book} />)
+        ) : (
+            <p className="text">
+                Книги не найдены, возможно они есть на{' '}
+                <a
+                    href="https://www.litres.ru/author/natalya-kalinina-12456612"
+                    className="link link--accent"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Литрес
+                </a>
+            </p>
+        )
+    }, [filteredBooks])
 
     return (
         <section className="books">
@@ -65,10 +77,9 @@ export default function Books() {
                 </select>
             </div>
             <div className="books__container">
-                {isLoading ? <div>Loading</div> : renderedBooks}
+                {isLoading ? <BookLoader /> : renderedBooks}
             </div>
             <div className="books__next">
-                <CreateBook />
                 <button className="books__next__button">Загрузить ещё</button>
             </div>
         </section>

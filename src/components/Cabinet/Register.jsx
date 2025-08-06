@@ -1,6 +1,11 @@
 import { useForm } from 'react-hook-form'
 import useSafeInput from '@/hooks/useSafeInput'
 import useFormatInput from '@/hooks/useFormatInput'
+import { useRegisterMutation } from '@/lib/api/user.api'
+import ReCAPTCHA from 'react-google-recaptcha'
+import useCaptcha from '@/hooks/useCaptcha'
+import { useState } from 'react'
+import { useActions } from '@/hooks/useActions'
 
 export default function Register({ setSwap }) {
     const {
@@ -11,31 +16,51 @@ export default function Register({ setSwap }) {
     const formatInput = useFormatInput()
     const safeInput = useSafeInput()
 
+    const [handleRegister] = useRegisterMutation()
+    const { getUserData } = useActions()
+
+    const [recaptchaToken, setRecaptchaToken] = useState(null)
+    const handleCaptcha = useCaptcha(setRecaptchaToken)
+
+    async function onSubmit(data, e) {
+        e.preventDefault()
+        // if (!recaptchaToken) {
+        //     throw new Error('Капча не пройдена!')
+        // }
+
+        try {
+            const registerData = { ...data, recaptchaToken }
+
+            const response = await handleRegister(registerData).unwrap()
+
+            getUserData(response)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <form
             className="cabinet__register"
             method="POST"
-            onSubmit={handleSubmit((data) => console.log(data))}
+            onSubmit={handleSubmit(onSubmit)}
         >
             <legend className="cabinet__legend">Регистрация</legend>
             <span
                 className="cabinet__error"
-                aria-hidden={
-                    !errors.registerLogin || !errors.registerLogin.type
-                }
+                aria-hidden={!errors.login || !errors.login.type}
             >
-                {errors.registerLogin?.type === 'required' &&
-                    'Необходимо заполнить'}
-                {errors.registerLogin?.type === 'minLength' &&
+                {errors.login?.type === 'required' && 'Необходимо заполнить'}
+                {errors.login?.type === 'minLength' &&
                     'Минимальная длина 8 символов'}
-                {errors.registerLogin?.type === 'maxLength' &&
+                {errors.login?.type === 'maxLength' &&
                     'Максимальная длина 40 символов'}
             </span>
             <input
                 type="text"
                 className="cabinet__register--input"
                 placeholder="Логин*"
-                {...register('registerLogin', {
+                {...register('login', {
                     minLength: 8,
                     maxLength: 40,
                     required: true,
@@ -45,22 +70,19 @@ export default function Register({ setSwap }) {
 
             <span
                 className="cabinet__error"
-                aria-hidden={
-                    !errors.registerPassword || !errors.registerPassword.type
-                }
+                aria-hidden={!errors.password || !errors.password.type}
             >
-                {errors.registerPassword?.type === 'required' &&
-                    'Необходимо заполнить'}
-                {errors.registerPassword?.type === 'minLength' &&
+                {errors.password?.type === 'required' && 'Необходимо заполнить'}
+                {errors.password?.type === 'minLength' &&
                     'Минимальная длина 8 символов'}
-                {errors.registerPassword?.type === 'maxLength' &&
+                {errors.password?.type === 'maxLength' &&
                     'Максимальная длина 40 символов'}
             </span>
             <input
                 type="password"
                 className="cabinet__register--input"
                 placeholder="Пароль*"
-                {...register('registerPassword', {
+                {...register('password', {
                     minLength: 8,
                     maxLength: 40,
                     required: true,
@@ -68,22 +90,21 @@ export default function Register({ setSwap }) {
             />
             <span
                 className="cabinet__error"
-                aria-hidden={!errors.registerName || !errors.registerName.type}
+                aria-hidden={!errors.username || !errors.username.type}
             >
-                {errors.registerName?.type === 'required' &&
-                    'Необходимо заполнить'}
-                {errors.registerName?.type === 'pattern' &&
+                {errors.username?.type === 'required' && 'Необходимо заполнить'}
+                {errors.username?.type === 'pattern' &&
                     'Спецсимволы и цифры запрещены'}
-                {errors.registerName?.type === 'minLength' &&
+                {errors.username?.type === 'minLength' &&
                     'Минимальная длина 2 символа'}
-                {errors.registerName?.type === 'maxLength' &&
+                {errors.username?.type === 'maxLength' &&
                     'Максимальная длина 40 символов'}
             </span>
             <input
                 type="text"
                 placeholder="Фамилия, Имя, Отчество*"
                 className="cabinet__register--input"
-                {...register('registerName', {
+                {...register('username', {
                     required: true,
                     minLength: 2,
                     maxLength: 40,
@@ -91,17 +112,14 @@ export default function Register({ setSwap }) {
                 })}
                 onInput={(e) => (e.target.value = safeInput(e))}
             />
-            <span
-                className="cabinet__error"
-                aria-hidden={!errors.registerEmail}
-            >
-                {errors.registerEmail?.message}
+            <span className="cabinet__error" aria-hidden={!errors.email}>
+                {errors.email?.message}
             </span>
             <input
                 type="email"
                 placeholder="Электронная почта"
                 className="cabinet__register--input"
-                {...register('registerEmail', {
+                {...register('email', {
                     validate: (input) => {
                         if (input === '') {
                             return undefined
@@ -116,19 +134,16 @@ export default function Register({ setSwap }) {
                 })}
                 onInput={(e) => (e.target.value = safeInput(e))}
             />
-            <span
-                className="cabinet__error"
-                aria-hidden={!errors.registerPhone}
-            >
-                {errors.registerPhone?.type === 'required'
+            <span className="cabinet__error" aria-hidden={!errors.phone}>
+                {errors.phone?.type === 'required'
                     ? 'Необходимо заполнить'
-                    : errors.registerPhone?.message}
+                    : errors.phone?.message}
             </span>
             <input
                 type="tel"
                 placeholder="Номер телефона*"
                 className="cabinet__register--input"
-                {...register('registerPhone', {
+                {...register('phone', {
                     required: true,
                     maxLength: 30,
                     validate: (input) =>
@@ -156,6 +171,11 @@ export default function Register({ setSwap }) {
                 />
                 Согласен с обработкой персональных данных
             </label>
+
+            <ReCAPTCHA
+                sitekey="6Lcl4x8rAAAAALreUu4J3osZrzEYq7DQNl4KjpDN"
+                onChange={handleCaptcha}
+            />
 
             <button className="cabinet__button" type="submit">
                 Зарегистрироваться

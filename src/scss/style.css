@@ -594,6 +594,12 @@ body.mobile {
     margin: 0 auto;
   }
 }
+.books__wrapper--loader {
+  width: 100%;
+  height: 400px;
+  background-color: #e5e7eb;
+  border-radius: 0.5rem;
+}
 .books__top {
   height: 100%;
   width: 100%;
@@ -699,6 +705,7 @@ body.mobile {
 .cabinet {
   width: 100%;
   height: 100vh;
+  min-height: 800px;
 }
 .cabinet__container {
   width: 50%;
@@ -801,4 +808,8 @@ body.mobile {
 .cabinet__swap > span {
   cursor: pointer;
   color: #fefefe;
+  transition: color 0.3s ease-in-out;
+}
+.cabinet__swap > span:hover {
+  color: #c45c34;
 }/*# sourceMappingURL=style.css.map */

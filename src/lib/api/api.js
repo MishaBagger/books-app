@@ -4,6 +4,19 @@ export const api = createApi({
     tagTypes: ['Book'],
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.NEXT_PUBLIC_API_URL,
+        credentials: 'include',
+        prepareHeaders: (headers, { getState }) => {
+            if (typeof window !== 'undefined') {
+                const token =
+                    getState().user.token || localStorage.getItem('token')
+
+                if (token) {
+                    headers.set('Authorization', `Bearer ${token}`)
+                }
+            }
+            return headers
+        },
+        
     }),
     endpoints: (builder) => ({
         getApi: builder.query({

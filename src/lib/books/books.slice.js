@@ -10,10 +10,11 @@ export const booksSlice = createSlice({
     },
     reducers: {
         getBooks: (state, action) => {
-            state.allBooks.push(...action.payload)
-            state.filteredBooks.push(...action.payload)
+            state.allBooks = action.payload
+            state.filteredBooks = action.payload
         },
         searchBooks: (state, action) => {
+            if (!state.filteredBooks || !state.allBooks) return
             const searchTerm = action.payload.toLowerCase().trim()
 
             if (!searchTerm) {
