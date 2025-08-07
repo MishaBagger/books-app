@@ -21,6 +21,10 @@
     font-family: var(--font-prata);
     font-size: clamp(1rem, 1rem + 0.5vw, 2.5rem);
     line-height: 2em;
+
+    &--admin {
+        text-align: center;
+    }
 }
 
 .text {
@@ -62,12 +66,16 @@
             @include text-accent;
         }
     }
+
+    &--admin {
+        color: #fefefe;
+    }
 }
 
 .link {
     padding: 1rem;
     margin-inline: 0.5rem;
-    font-size: clamp(.75rem, 0.9rem + 0.1vw, 1.25rem);
+    font-size: clamp(0.75rem, 0.9rem + 0.1vw, 1.25rem);
     color: #fff;
     transition: color 0.5s ease;
 
@@ -81,6 +89,10 @@
 
         &:hover {
             @include text-accent;
+        }
+
+        &:focus-visible {
+            outline: 2px solid #c45c34;
         }
 
         @media (max-width: 768px) {

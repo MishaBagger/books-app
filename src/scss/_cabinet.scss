@@ -9,6 +9,10 @@
         display: flex;
         justify-content: center;
 
+        &--auth {
+            width: 70%;
+        }
+
         & > form {
             display: flex;
             flex-direction: column;
@@ -40,6 +44,10 @@
             padding: 0.5rem;
             @include about-text-background;
             @include input-text;
+
+            &:focus-visible {
+                outline: 2px solid #c45c34;
+            }
         }
 
         @media (max-width: 768px) {
@@ -66,6 +74,10 @@
         &[aria-hidden='true'] {
             opacity: 0;
         }
+
+        &--white {
+            @include about-text;
+        }
     }
 
     &__button {
@@ -76,12 +88,16 @@
         background-color: #fcbf93;
         font-family: var(--font-jost);
         font-size: clamp(0.75rem, 0.75rem + 0.4vw, 1.25rem);
-        transition: all 0.5s ease;
+        transition: color, background-color 0.5s ease;
 
         &:hover {
             color: #fcbf93;
             background-color: #c45c34;
         }
+
+        &:focus-visible {
+                outline: 2px solid #c45c34;
+            }
     }
 
     &__checkbox {

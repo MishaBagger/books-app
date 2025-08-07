@@ -2,8 +2,14 @@
 
 import Login from '@/components/Cabinet/Login'
 import Register from '@/components/Cabinet/Register'
+import AdminLoader from '@/components/Cabinet/AdminLoader'
+const Admin = dynamic(() => import('@/components/Cabinet/Admin'), {
+    ssr: false,
+    loading: () => <AdminLoader />,
+})
 import { useActions } from '@/hooks/useActions'
 import { useLazyAccessQuery, useLogoutMutation } from '@/lib/api/user.api'
+import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
@@ -35,18 +41,19 @@ export default function Cabinet() {
 
     return (
         <section className="cabinet">
-            <div className="cabinet__container">
+            <div
+                className={isAuth ? 'cabinet__container cabinet__container--auth' : 'cabinet__container'}
+            >
                 {!isAuth ? (
                     swap ? (
                         <Register setSwap={setSwap} />
                     ) : (
                         <Login setSwap={setSwap} />
                     )
+                ) : data && userData.role && data.user.role !== 'admin' ? (
+                    <Admin logout={logout} />
                 ) : (
-                    <div>
-                        Вы авторизованы! {userData.name}
-                        <button onClick={logout}>Logout</button>
-                    </div>
+                    <div>Вы не админ</div>
                 )}
             </div>
         </section>
