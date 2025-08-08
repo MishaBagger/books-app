@@ -3,20 +3,14 @@ import useSafeInput from '@/hooks/useSafeInput'
 import ReCAPTCHA from 'react-google-recaptcha'
 import useCaptcha from '@/hooks/useCaptcha'
 import { useState } from 'react'
-import { useLoginMutation } from '@/lib/api/user.api'
-import { useActions } from '@/hooks/useActions'
 
-export default function Login({ setSwap }) {
+export default function Login({ setSwap, handleLogin, getUserData }) {
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm({ mode: 'onBlur' })
     const safeInput = useSafeInput()
-
-    const [handleLogin] = useLoginMutation()
-
-    const { getUserData } = useActions()
 
     const [recaptchaToken, setRecaptchaToken] = useState(null)
     const handleCaptcha = useCaptcha(setRecaptchaToken)
@@ -34,7 +28,7 @@ export default function Login({ setSwap }) {
 
             getUserData(response)
         } catch (error) {
-            console.log(`Ошибка ${error?.status || error?.data?.status} в компоненте: ${error.data.message}`)
+            console.log(`Ошибка ${error?.status || error?.data?.status} в компоненте: ${error?.message || error?.data?.message || 'Неизвестная ошибка'}`)
         }
     }
 

@@ -1,13 +1,11 @@
 import { useForm } from 'react-hook-form'
 import useSafeInput from '@/hooks/useSafeInput'
 import useFormatInput from '@/hooks/useFormatInput'
-import { useRegisterMutation } from '@/lib/api/user.api'
 import ReCAPTCHA from 'react-google-recaptcha'
 import useCaptcha from '@/hooks/useCaptcha'
 import { useState } from 'react'
-import { useActions } from '@/hooks/useActions'
 
-export default function Register({ setSwap }) {
+export default function Register({ setSwap, handleRegister, getUserData }) {
     const {
         register,
         handleSubmit,
@@ -15,9 +13,6 @@ export default function Register({ setSwap }) {
     } = useForm({ mode: 'onBlur' })
     const formatInput = useFormatInput()
     const safeInput = useSafeInput()
-
-    const [handleRegister] = useRegisterMutation()
-    const { getUserData } = useActions()
 
     const [recaptchaToken, setRecaptchaToken] = useState(null)
     const handleCaptcha = useCaptcha(setRecaptchaToken)
@@ -35,7 +30,7 @@ export default function Register({ setSwap }) {
 
             getUserData(response)
         } catch (error) {
-            console.log(`Ошибка ${error?.status || error?.data?.status} в компоненте: ${error.data.message}`)
+            console.log(`Ошибка ${error?.status || error?.data?.status} в компоненте: ${error?.message || error?.data?.message || 'Неизвестная ошибка'}`)
         }
     }
 
