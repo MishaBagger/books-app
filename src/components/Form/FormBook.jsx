@@ -2,8 +2,21 @@ import useFormatInput from '@/hooks/useFormatInput'
 import useSafeInput from '@/hooks/useSafeInput'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import SelectBook from './SelectBook'
+import { useSelector } from 'react-redux'
+import {
+    useCreateBookMutation,
+    useDeleteBookMutation,
+    useUpdateBookMutation,
+} from '@/lib/api/books.api'
 
-export default function AddBook({ editMode }) {
+export default function FormBook({ editMode }) {
+    const { filteredBooks: books } = useSelector((state) => state.books)
+
+    const [createBook] = useCreateBookMutation()
+    const [updateBook] = useUpdateBookMutation()
+    const [deleteBook] = useDeleteBookMutation()
+
     const {
         reset,
         register,
@@ -14,41 +27,50 @@ export default function AddBook({ editMode }) {
     const formatInput = useFormatInput()
     const safeInput = useSafeInput()
 
-    async function addSubmit(data, e) {
-        console.log('add')
-        console.log(data)
-        reset()
+    async function addSubmit(data) {
+        try {
+            await createBook(data)
+            reset()
+        } catch (error) {
+            console.error(error)
+        }
     }
 
     async function updateSubmit(data, e) {
-        console.log('update')
-        console.log(data)
-        reset()
+        try {
+
+            if (!id) throw new Error('Не выбрана книга')
+
+            await updateBook(data, id)
+            reset()
+            setId('')
+        } catch (error) {
+            console.error(error)
+        }
     }
 
-    async function deleteSubmit(data, e) {
-        console.log(data, id)
-        setId('')
-    }
+    async function deleteSubmit(_, e) {
+        try {
 
-    const banners = [
-        {
-            id: 1,
-            image: 1,
-        },
-        {
-            id: 2,
-            image: 2,
-        },
-    ]
+            if (!id) throw new Error('Не выбрана книга')
+
+            await deleteBook(id)
+            setId('')
+        } catch (error) {
+            console.error(error)
+        }
+    }
 
     return (
         <form
             className="admin__form"
             method="POST"
             onSubmit={handleSubmit(
-                editMode === 'add' ? addSubmit :
-                editMode === 'update' ? updateSubmit : deleteSubmit
+                editMode === 'add'
+                    ? addSubmit
+                    : editMode === 'update'
+                    ? updateSubmit
+                    : deleteSubmit
             )}
         >
             <legend className="cabinet__legend">
@@ -62,6 +84,9 @@ export default function AddBook({ editMode }) {
 
             {editMode === 'add' || editMode === 'update' ? (
                 <>
+                    {editMode === 'update' && (
+                        <SelectBook setId={setId} books={books} />
+                    )}
                     <span
                         className="cabinet__error cabinet__error--white"
                         aria-hidden={!errors.title || !errors.title.type}
@@ -189,23 +214,7 @@ export default function AddBook({ editMode }) {
                     />
                 </>
             ) : (
-                <select
-                    className="admin__form--select"
-                    defaultValue={'DEFAULT'}
-                    onChange={(e) => setId(e.target.value)}
-                >
-                    <option value="DEFAULT" disabled>
-                        Выберите
-                    </option>
-                    {banners &&
-                        banners.map((banner) => (
-                            <option key={banner.id} value={banner.id}>
-                                #{banner.id}
-                                {': '}
-                                {banner.image}
-                            </option>
-                        ))}
-                </select>
+                <SelectBook setId={setId} books={books} />
             )}
 
             <button

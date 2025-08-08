@@ -30,7 +30,6 @@ a,
 a:link,
 a:visited {
     text-decoration: none;
-
 }
 
 a:hover {
@@ -126,6 +125,21 @@ input:active,
 button:focus,
 button:active {
     outline: none;
+}
+
+@keyframes autofill-fix {
+    to {
+        -webkit-text-fill-color: #fefefe;
+        background-color: #c45c34;
+    }
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-text-fill-color: #fefefe;
+    -webkit-box-shadow: 0 0 0 30px #c45c34 inset;
+    animation: autofill-fix 1s forwards;
 }
 
 button::-moz-focus-inner {

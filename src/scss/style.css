@@ -127,6 +127,20 @@ button:active {
   outline: none;
 }
 
+@keyframes autofill-fix {
+  to {
+    -webkit-text-fill-color: #fefefe;
+    background-color: #c45c34;
+  }
+}
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-text-fill-color: #fefefe;
+  -webkit-box-shadow: 0 0 0 30px #c45c34 inset;
+  animation: autofill-fix 1s forwards;
+}
+
 button::-moz-focus-inner {
   padding: 0;
   border: 0;
@@ -203,6 +217,9 @@ h1 {
 .subtitle--admin {
   text-align: center;
 }
+.subtitle--toast {
+  font-size: clamp(0.75rem, 0.5rem + 0.5vw, 2.5rem);
+}
 
 .text {
   font-family: var(--font-jost);
@@ -240,6 +257,9 @@ h1 {
 }
 .text--admin {
   color: #fefefe;
+}
+.text--toast {
+  font-size: clamp(0.75rem, 0.3rem + 0.5vw, 2.5rem);
 }
 
 .link {
@@ -714,16 +734,14 @@ body.mobile {
 .cabinet {
   width: 100%;
   height: 100vh;
-  min-height: 800px;
+  min-height: -moz-fit-content;
+  min-height: fit-content;
 }
 .cabinet__container {
-  width: 50%;
+  width: 40%;
   margin: 0 auto;
   display: flex;
   justify-content: center;
-}
-.cabinet__container--auth {
-  width: 70%;
 }
 .cabinet__container > form {
   display: flex;
@@ -736,10 +754,18 @@ body.mobile {
 .cabinet__container > form > input::placeholder {
   color: #c45c34;
 }
+@media (max-width: 1450px) {
+  .cabinet__container {
+    width: 60%;
+  }
+}
 @media (max-width: 992px) {
   .cabinet__container {
     width: 70%;
   }
+}
+.cabinet__container--auth {
+  width: 70%;
 }
 @media (max-width: 568px) {
   .cabinet__container {
@@ -759,7 +785,7 @@ body.mobile {
   background-color: #fcbf93;
   color: #fefefe;
   font-family: var(--font-jost);
-  font-size: clamp(0.75rem, 0.75rem + 0.4vw, 1.25rem);
+  font-size: clamp(0.75rem, 0.9rem + 0.1vw, 1.25rem);
 }
 .cabinet__register--input:focus-visible {
   outline: 2px solid #c45c34;
@@ -849,11 +875,18 @@ body.mobile {
   border-radius: 0.5rem;
   background-color: #fcbf93;
 }
+@media (max-width: 1192px) {
+  .admin__container {
+    flex-direction: column;
+  }
+}
 .admin__wrapper {
   width: 100%;
   height: 100%;
 }
 .admin__form {
+  width: 70%;
+  margin: 0 auto;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -861,30 +894,33 @@ body.mobile {
 }
 .admin__form > input::-moz-placeholder {
   color: #fefefe;
+  font-size: clamp(0.75rem, 0.9rem + 0.1vw, 1.25rem);
 }
 .admin__form > input::placeholder {
   color: #fefefe;
+  font-size: clamp(0.75rem, 0.9rem + 0.1vw, 1.25rem);
 }
 .admin__form--input {
   border-radius: 0.5rem;
-  margin-block: 0.5rem;
-  padding: 0.5rem;
+  margin-block: 0.4rem;
+  padding: 0.4rem;
   background-color: #fb8159;
   color: #fefefe;
   font-family: var(--font-jost);
-  font-size: clamp(0.75rem, 0.75rem + 0.4vw, 1.25rem);
+  font-size: clamp(0.75rem, 0.9rem + 0.1vw, 1.25rem);
 }
 .admin__form--input:focus-visible {
   outline: 2px solid #c45c34;
 }
 .admin__form--select {
   border-radius: 0.5rem;
-  margin-block: 0.5rem;
-  padding: 0.5rem;
+  margin-block: 0.4rem;
+  padding: 0.4rem;
   background-color: #fb8159;
   color: #fefefe;
   font-family: var(--font-jost);
-  font-size: clamp(0.75rem, 0.75rem + 0.4vw, 1.25rem);
+  font-size: clamp(0.75rem, 0.9rem + 0.1vw, 1.25rem);
+  font-size: clamp(0.75rem, 0.9rem + 0.1vw, 1.25rem);
 }
 .admin__form--select:focus {
   outline: none;
@@ -895,8 +931,8 @@ body.mobile {
   }
 }
 .admin__button {
-  margin: 0.5rem auto;
-  padding: 0.5rem 1rem;
+  margin: 0.4rem auto;
+  padding: 0.4rem 1rem;
   border-radius: 0.5rem;
   color: #fefefe;
   background-color: #fb8159;
@@ -918,4 +954,14 @@ body.mobile {
 .admin__selectors {
   display: flex;
   gap: 1rem;
+}
+@media (max-width: 568px) {
+  .admin {
+    width: 90%;
+  }
+}
+
+.toast {
+  display: flex;
+  flex-direction: column;
 }/*# sourceMappingURL=style.css.map */

@@ -1,4 +1,5 @@
 import { Lora, Jost, Prata } from 'next/font/google'
+import { ToastContainer } from 'react-toastify'
 import '../scss/style.css'
 import StoreProvider from './StoreProvider'
 import Header from '@/components/Header/Header'
@@ -36,7 +37,19 @@ export default function RootLayout({ children }) {
                 <StoreProvider>
                     <Header />
                     <Main>{children}</Main>
-
+                    <ToastContainer
+                        position="top-right"
+                        autoClose={5000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                        theme="light"
+                        style={{ zIndex: 10000, top: '20%' }}
+                    />
                     <Footer />
                 </StoreProvider>
             </body>

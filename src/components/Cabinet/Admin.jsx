@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
 
-const AddBook = dynamic(() => import('@/components/Form/AddBook'), {
+const FormBook = dynamic(() => import('@/components/Form/FormBook'), {
     ssr: false,
 })
 export default function Admin({ logout }) {
@@ -13,7 +13,7 @@ export default function Admin({ logout }) {
             <div className="admin__container">
                 <div className="admin__wrapper">
                     <p className="subtitle subtitle--admin text--admin">
-                        Информация о сайте:
+                        Информация о сайте
                     </p>
                     <p className="text text--admin">Посещений за всё время:</p>
                     <p className="text text--admin">Посещений за месяц:</p>
@@ -55,9 +55,9 @@ export default function Admin({ logout }) {
                     {(() => {
                         switch (select) {
                             case 'books':
-                                return <AddBook editMode={editMode} />
+                                return <FormBook editMode={editMode} />
                             default:
-                                return <AddBook editMode={editMode} />
+                                return <FormBook editMode={editMode} />
                         }
                     })()}
                 </div>

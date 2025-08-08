@@ -35,7 +35,7 @@ export default function Register({ setSwap }) {
 
             getUserData(response)
         } catch (error) {
-            console.log(error)
+            console.log(`Ошибка ${error?.status || error?.data?.status} в компоненте: ${error.data.message}`)
         }
     }
 

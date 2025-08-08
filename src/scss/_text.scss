@@ -25,6 +25,10 @@
     &--admin {
         text-align: center;
     }
+
+    &--toast {
+        font-size: clamp(.75rem, .5rem + 0.5vw, 2.5rem);
+    }
 }
 
 .text {
@@ -69,6 +73,10 @@
 
     &--admin {
         color: #fefefe;
+    }
+
+    &--toast {
+        font-size: clamp(.75rem, .3rem + 0.5vw, 2.5rem);
     }
 }
 

@@ -1,17 +1,13 @@
 .cabinet {
     width: 100%;
     height: 100vh;
-    min-height: 800px;
+    min-height: fit-content;
 
     &__container {
-        width: 50%;
+        width: 40%;
         margin: 0 auto;
         display: flex;
         justify-content: center;
-
-        &--auth {
-            width: 70%;
-        }
 
         & > form {
             display: flex;
@@ -23,7 +19,15 @@
             }
         }
 
+        @media (max-width: 1450px) {
+            width: 60%;
+        }
+
         @media (max-width: 992px) {
+            width: 70%;
+        }
+
+        &--auth {
             width: 70%;
         }
 
@@ -96,8 +100,8 @@
         }
 
         &:focus-visible {
-                outline: 2px solid #c45c34;
-            }
+            outline: 2px solid #c45c34;
+        }
     }
 
     &__checkbox {
