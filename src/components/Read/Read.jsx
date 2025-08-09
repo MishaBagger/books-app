@@ -1,10 +1,26 @@
+'use client'
 import { read } from '@/data/read'
+import { motion } from 'framer-motion'
 
 export default function Read() {
     return (
-        <section className="read">
-            <h2 className="title">Читать</h2>
-            <div className="read__container">
+        <section className="read" id="read">
+            <motion.h2
+                className="title"
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+            >
+                Читать
+            </motion.h2>
+            <motion.div
+                className="read__container"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+            >
                 <p className="text text--first">Дорогие читатели!</p>
 
                 <p className="text text--about">
@@ -24,7 +40,8 @@ export default function Read() {
                         >
                             {link.name}
                         </a>,
-                    ])} и многие другие. Каждое произведение - это частичка моей
+                    ])}{' '}
+                    и многие другие. Каждое произведение - это частичка моей
                     души, результат кропотливой работы и творческих исканий.
                 </p>
                 <p className="text text--about">
@@ -35,7 +52,7 @@ export default function Read() {
                     важно для меня! Я внимательно изучаю все отклики и с
                     нетерпением жду новых.
                 </p>
-            </div>
+            </motion.div>
         </section>
     )
 }

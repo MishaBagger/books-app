@@ -56,7 +56,7 @@ export default function Books() {
     }, [filteredBooks])
 
     return (
-        <section className="books">
+        <section className="books" id="books">
             <motion.h2
                 className="title"
                 initial={{ opacity: 0, x: -50 }}

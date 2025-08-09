@@ -1,9 +1,17 @@
+'use client'
 import { contacts } from '@/data/contacts'
 import NavLinks from '../Header/NavLinks'
+import { motion } from 'framer-motion'
 
 export default function Footer() {
     return (
-        <footer className="footer">
+        <motion.footer
+            className="footer"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+        >
             <div className="footer__container">
                 <NavLinks type="footer" />
                 <div className="footer__contacts">
@@ -21,6 +29,6 @@ export default function Footer() {
                 </div>
             </div>
             <p className="text text--copy">© Все права защищены. 2025 год</p>
-        </footer>
+        </motion.footer>
     )
 }

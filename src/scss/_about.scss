@@ -41,12 +41,6 @@
             object-position: left top;
             border-radius: 15px;
             box-shadow: 4px 4px 8px #999;
-            cursor: pointer;
-            transition: all 0.2s ease;
-
-            &:hover {
-                transform: scale(1.02);
-            }
         }
     }
 }

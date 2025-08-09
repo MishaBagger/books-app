@@ -154,15 +154,6 @@ legend {
   display: block;
 }
 
-:target {
-  scroll-margin-top: 160px;
-}
-@media (max-width: 992px) {
-  :target {
-    scroll-margin-top: 140px;
-  }
-}
-
 h1 {
   font-family: var(--font-geist-mono);
 }
@@ -474,12 +465,13 @@ body.mobile {
   max-width: 1920px;
   margin: 0 auto;
 }
-.main > * {
+.main > section {
   width: 70%;
   margin: 0 auto;
+  scroll-margin-top: 4rem;
 }
 @media (max-width: 992px) {
-  .main > * {
+  .main > section {
     width: 90%;
   }
 }
@@ -551,11 +543,6 @@ body.mobile {
      object-position: left top;
   border-radius: 15px;
   box-shadow: 4px 4px 8px #999;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-.about__image img:hover {
-  transform: scale(1.02);
 }
 
 @media (max-width: 992px) {
@@ -752,6 +739,7 @@ body.mobile {
 }
 
 .cabinet {
+  padding-top: 1rem;
   width: 100%;
   height: 100vh;
   min-height: -moz-fit-content;

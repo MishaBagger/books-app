@@ -155,15 +155,6 @@ legend {
     display: block;
 }
 
-:target {
-    scroll-margin-top: 160px;
-    @media (max-width: 992px) {
-        & {
-            scroll-margin-top: 140px;
-        }
-    }
-}
-
 h1 {
     font-family: var(--font-geist-mono);
 }

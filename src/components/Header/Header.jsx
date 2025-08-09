@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import Mobile from './Mobile'
 import NavLinks from './NavLinks'
+import { motion } from 'framer-motion'
 
 export default function Header() {
     const [isMobile, setIsMobile] = useState(false)
@@ -42,12 +43,17 @@ export default function Header() {
     }, [isModal])
 
     return (
-        <header className="header">
+        <motion.header
+            className="header"
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+        >
             {isMobile ? (
                 <Mobile onClick={showModal} />
             ) : (
                 <NavLinks onClick={showModal} />
             )}
-        </header>
+        </motion.header>
     )
 }

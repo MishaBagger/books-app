@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 
 export default function About() {
     return (
-        <section className="about">
+        <section className="about" id="about">
             <motion.h2
                 className="title"
                 initial={{ opacity: 0, x: -50 }}
