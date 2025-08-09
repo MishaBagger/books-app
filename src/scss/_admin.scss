@@ -69,13 +69,11 @@
     }
 
     &__button {
+        @include input-text;
         margin: 0.4rem auto;
-        padding: 0.4rem 1rem;
+        padding: 0.4rem 1.5rem;
         border-radius: 0.5rem;
-        color: #fefefe;
         background-color: #fb8159;
-        font-family: var(--font-jost);
-        font-size: clamp(0.75rem, 0.75rem + 0.4vw, 1.25rem);
         transition: background-color 0.5s ease;
 
         &:hover {

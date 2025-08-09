@@ -9,6 +9,7 @@
             @include about-text-background;
             @include book-card-title;
             font-family: var(--font-jost);
+            font-size: clamp(0.75rem, 0.7rem + 0.3vw, 1rem);
             padding: 0.5rem;
             border-radius: 0.3rem;
             outline: none;
@@ -48,15 +49,22 @@
 
     &__container {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(5, 1fr);
         gap: 2rem;
         overflow: hidden;
 
-        @media (max-width: 1300px) {
+        @media (max-width: 1450px) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        @media (max-width: 1192px) {
             grid-template-columns: repeat(3, 1fr);
         }
 
         @media (max-width: 768px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @media (max-width: 568px) {
             grid-template-columns: repeat(2, 1fr);
         }
     }
@@ -66,23 +74,12 @@
         flex-direction: column;
         border-radius: 0.5rem;
         @include book-card-background;
-
-        @media (max-width: 768px) {
-            max-width: 250px;
-            margin: 0 auto;
-        }
-
-        &--loader {
-            width: 100%;
-            height: 400px;
-            background-color: #e5e7eb;
-            border-radius: 0.5rem;
-        }
     }
 
     &__top {
-        height: 100%;
-        width: 100%;
+        display: flex;
+        flex-shrink: 2;
+        position: relative;
 
         img {
             height: 100%;
@@ -94,22 +91,30 @@
     }
 
     &__bottom {
-        height: 100%;
         padding: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
     }
 
     &__buy {
-        height: 100%;
-        padding: 0 0.5rem;
+        display: flex;
+        justify-content: center;
+        padding-bottom: 0.7rem;
         border-radius: 0 0 0.5rem 0.5rem;
-        background-color: #fcbf93;
-        &__container {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            gap: 0.5rem 1rem;
-            margin-block: 0.5rem;
+        
+        & > a {
+
+            flex: 0.6;
         }
+
+        // &__container {
+        //     display: flex;
+        //     flex-direction: row;
+        //     flex-wrap: wrap;
+        //     gap: 0.5rem 1rem;
+        //     margin-block: 0.5rem;
+        // }
     }
 
     &__next {

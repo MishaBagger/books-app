@@ -1,70 +1,83 @@
 .title {
-    font-size: clamp(1.5rem, 1rem + 1vw, 5rem);
+    font-size: clamp(1.25rem, 1rem + 1.25vw, 2rem);
     font-family: var(--font-prata);
-    line-height: 3em;
+    line-height: 2.5;
     color: #fb8159;
 
     @media (max-width: 1192px) {
-        line-height: 2em;
+        line-height: 2;
     }
 
     &--book {
         font-family: var(--font-jost);
         font-weight: 500;
-        font-size: clamp(0.75rem, 0.6rem + 0.5vw, 1.5rem);
-        line-height: 1.5em;
+        font-size: clamp(0.875rem, 0.7rem + 0.4vw, 1.25rem);
+        line-height: 1.5;
         text-align: center;
         @include book-card-title;
     }
 }
+
 .subtitle {
     font-family: var(--font-prata);
-    font-size: clamp(1rem, 1rem + 0.5vw, 2.5rem);
-    line-height: 2em;
+    font-size: clamp(0.875rem, 0.75rem + 0.6vw, 1.25rem);
+    line-height: 1.8;
 
     &--admin {
         text-align: center;
     }
 
     &--toast {
-        font-size: clamp(.75rem, .5rem + 0.5vw, 2.5rem);
+        font-size: clamp(0.75rem, 0.6rem + 0.5vw, 1rem);
     }
 }
 
 .text {
     font-family: var(--font-jost);
-    font-size: clamp(0.75rem, 0.75rem + 0.4vw, 1.25rem);
-    line-height: 1.5em;
+    font-size: clamp(0.75rem, 0.7rem + 0.3vw, 1rem);
+    line-height: 1.6;
 
     &--about {
+        font-size: clamp(0.75rem, 0.7rem + 0.4vw, 1.25rem);
         @include about-text;
     }
 
     &--book {
-        font-size: clamp(0.5rem, 0.5rem + 0.3vw, 1.25rem);
+        line-height: 1.4;
+        font-size: clamp(0.75rem, 0.65rem + 0.2vw, 1rem);
         @include book-card-text;
     }
 
+    &--date {
+        line-height: 1.4;
+        font-size: clamp(0.75rem, 0.65rem + 0.2vw, 1rem);
+        @include book-card-title;
+    }
+
     &--buy {
-        font-size: clamp(0.75rem, 0.5rem + 0.4vw, 1.25rem);
-        line-height: 1.5em;
+        font-size: clamp(0.75rem, 0.65rem + 0.3vw, 1rem);
+        line-height: 1.6;
         font-weight: bold;
         @include book-card-title;
+    }
+
+    &--not-found {
+      font-size: clamp(0.75rem, 0.65rem + 0.2vw, 1rem);
     }
 
     &--first {
         font-family: inherit;
         color: #fff;
-        font-size: clamp(1rem, 1rem + 0.5vw, 5rem);
+        font-size: clamp(0.875rem, 0.75rem + 0.6vw, 1.25rem);
     }
 
     &--copy {
         text-align: center;
-        font-size: clamp(0.75rem, 0.5rem + 0.5vw, 1rem);
-        line-height: 2em;
+        font-size: clamp(0.75rem, 0.65rem + 0.3vw, 1rem);
+        line-height: 1.8;
         @include text-orange;
         cursor: default;
-        transition: color 0.5s ease;
+        transition: color 0.3s ease;
 
         &:hover {
             @include text-accent;
@@ -76,16 +89,16 @@
     }
 
     &--toast {
-        font-size: clamp(.75rem, .3rem + 0.5vw, 2.5rem);
+        font-size: clamp(0.75rem, 0.65rem + 0.3vw, 1rem);
     }
 }
 
 .link {
-    padding: 1rem;
+    padding: 0.75rem;
     margin-inline: 0.5rem;
-    font-size: clamp(0.75rem, 0.9rem + 0.1vw, 1.25rem);
+    font-size: clamp(0.75rem, 0.7rem + 0.3vw, 1rem);
     color: #fff;
-    transition: color 0.5s ease;
+    transition: color 0.3s ease;
 
     &:hover {
         @include text-orange;
@@ -109,13 +122,13 @@
     }
 
     &-mobile {
-        font-size: 18px;
-        line-height: 1.5em;
+        font-size: 0.9rem;
+        line-height: 1.5;
         color: #fff;
     }
 
     &--book {
-        font-size: clamp(0.75rem, 0.5rem + 0.4vw, 1.25rem);
+        font-size: clamp(0.75rem, 0.65rem + 0.3vw, 1rem);
         font-weight: bold;
         padding: 0;
         margin: 0;
@@ -123,6 +136,20 @@
 
         &:hover {
             @include text-accent;
+        }
+    }
+
+    &--buy {
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        text-align: center;
+        @include about-text-background;
+        transition: background-color 0.5s ease;
+
+        &:hover {
+            background-color: #c45c34;
+            color: #fefefe;
         }
     }
 

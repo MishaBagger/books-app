@@ -29,35 +29,71 @@ export default function FormBook({ editMode }) {
 
     async function addSubmit(data) {
         try {
-            await createBook(data)
-            reset()
+            const formData = new FormData()
+            formData.append('title', data.title)
+            formData.append('description', data.description)
+            formData.append('date', data.date)
+            formData.append('link', data.link)
+            formData.append('platform', data.platform)
+            formData.append('image', data.image[0])
+
+            const response = await createBook(formData)
+
+            if (!response.error) {
+                reset()
+            }
+
         } catch (error) {
-            console.error(error)
+            console.log(
+                `Ошибка ${error?.status || error?.data?.status} в компоненте: ${
+                    error?.message ||
+                    error?.data?.message ||
+                    'Неизвестная ошибка'
+                }`
+            )
         }
     }
 
     async function updateSubmit(data, e) {
         try {
-
             if (!id) throw new Error('Не выбрана книга')
 
-            await updateBook(data, id)
-            reset()
-            setId('')
+            const response = await updateBook(data, id)
+
+            if (!response.error) {
+                reset()
+                setId('')
+            }
+
         } catch (error) {
-            console.error(error)
+            console.log(
+                `Ошибка ${error?.status || error?.data?.status} в компоненте: ${
+                    error?.message ||
+                    error?.data?.message ||
+                    'Неизвестная ошибка'
+                }`
+            )
         }
     }
 
-    async function deleteSubmit(_, e) {
+    async function deleteSubmit(_data, e) {
         try {
-
             if (!id) throw new Error('Не выбрана книга')
 
-            await deleteBook(id)
-            setId('')
+            const response = await deleteBook(id)
+
+            if (!response.error) {
+                setId('')
+            }
+
         } catch (error) {
-            console.error(error)
+            console.log(
+                `Ошибка ${error?.status || error?.data?.status} в компоненте: ${
+                    error?.message ||
+                    error?.data?.message ||
+                    'Неизвестная ошибка'
+                }`
+            )
         }
     }
 
@@ -149,7 +185,7 @@ export default function FormBook({ editMode }) {
                     <input
                         type="text"
                         className="admin__form--input"
-                        placeholder="Дата выхода*"
+                        placeholder="Дата написания*"
                         {...register('date', {
                             minLength: 10,
                             required: true,

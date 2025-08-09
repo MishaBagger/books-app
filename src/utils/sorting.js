@@ -9,7 +9,7 @@ export default function sorting(state) {
 
         case 'desc':
             state.filteredBooks = [...state.filteredBooks].sort((a, b) =>
-                a.name.localeCompare(b.name, 'ru', {
+                a.title.localeCompare(b.title, 'ru', {
                     sensitivity: 'base',
                 })
             )

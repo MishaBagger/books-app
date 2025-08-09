@@ -6,10 +6,10 @@ import Read from '@/components/Read/Read'
 export default function Home() {
     return (
         <>
-                <Banner />
-                <About />
-                <Books />
-                <Read />
+            <Banner />
+            <About />
+            <Books />
+            <Read />
         </>
     )
 }

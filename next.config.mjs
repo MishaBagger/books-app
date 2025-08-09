@@ -3,6 +3,14 @@ const nextConfig = {
     devIndicators: false,
     images: {
         formats: ['image/avif', 'image/webp'],
+        remotePatterns: [
+            {
+                protocol: 'http',
+                hostname: 'localhost',
+                port: '5000',
+                pathname: '/**',
+            },
+        ],
     },
     webpack: (config) => {
         config.watchOptions = {

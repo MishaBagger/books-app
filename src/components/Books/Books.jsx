@@ -6,6 +6,7 @@ import { useActions } from '@/hooks/useActions'
 import useDebounce from '@/hooks/useDebounce'
 import { useGetBooksQuery } from '@/lib/api/books.api'
 import BookLoader from './BookLoader'
+import { motion } from 'framer-motion'
 
 export default function Books() {
     const [searchTerm, setSearchTerm] = useState('')
@@ -25,7 +26,7 @@ export default function Books() {
 
     useEffect(() => {
         getBooks(dataBooks)
-    }, [])
+    }, [dataBooks])
 
     useEffect(() => {
         stableSort(sortType)
@@ -56,8 +57,22 @@ export default function Books() {
 
     return (
         <section className="books">
-            <h2 className="title">Мои книги</h2>
-            <div className="books__filters">
+            <motion.h2
+                className="title"
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+            >
+                Мои книги
+            </motion.h2>
+            <motion.div
+                className="books__filters"
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+            >
                 <input
                     type="search"
                     placeholder="Поиск"
@@ -75,7 +90,8 @@ export default function Books() {
                     <option value="date">Сортировать по новым</option>
                     <option value="desc">Сортировать по алфавиту</option>
                 </select>
-            </div>
+            </motion.div>
+
             <div className="books__container">
                 {isLoading ? <BookLoader /> : renderedBooks}
             </div>

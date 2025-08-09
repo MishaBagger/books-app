@@ -1,15 +1,32 @@
+'use client'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 
 export default function About() {
     return (
         <section className="about">
-            <h2 className="title">Обо мне</h2>
+            <motion.h2
+                className="title"
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+            >
+                Обо мне
+            </motion.h2>
+
             <div className="about__container">
-                <div className="about__text">
+                <motion.div
+                    className="about__text"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                >
                     <p className="text text--about">
                         Меня зовут Наталья Калинина и свой первый роман «Только
-                        вперёд» я написала в 2006 году и с тех пор продолжила свой
-                        путь и совершенствовала произведения.
+                        вперёд» я написала в 2006 году и с тех пор продолжила
+                        свой путь и совершенствовала произведения.
                     </p>
                     <p className="text text--about">
                         С февраля 2024 года являюсь членом литературного клуба
@@ -28,9 +45,15 @@ export default function About() {
                         Мои произведения попадали в популярные лонг-листы и
                         шорт-листы.
                     </p>
-                </div>
+                </motion.div>
 
-                <div className="about__image">
+                <motion.div
+                    className="about__image"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                >
                     <Image
                         src={'/about.jpg'}
                         width={500}
@@ -40,7 +63,7 @@ export default function About() {
                         sizes="100vw"
                         alt="banner"
                     />
-                </div>
+                </motion.div>
             </div>
         </section>
     )

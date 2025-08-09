@@ -23,7 +23,7 @@ export const booksSlice = createSlice({
             } else {
                 state.filteredBooks = state.allBooks.filter(
                     (book) =>
-                        book.name.toLowerCase().includes(searchTerm) ||
+                        book.title.toLowerCase().includes(searchTerm) ||
                         book.description.toLowerCase().includes(searchTerm)
                 )
             }
