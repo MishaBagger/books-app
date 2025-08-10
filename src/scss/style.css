@@ -639,7 +639,6 @@ body.mobile {
 }
 .books__top {
   display: flex;
-  flex-shrink: 2;
   position: relative;
 }
 .books__top img {

@@ -58,7 +58,7 @@ export default function FormBook({ editMode }) {
 
             const formData = formDataCreating(data)
 
-            await updateBook(formData, id).unwrap()
+            await updateBook({ id, formData }).unwrap()
 
             reset()
             setId('')
@@ -135,7 +135,7 @@ export default function FormBook({ editMode }) {
                         {...register('title', {
                             minLength: 5,
                             maxLength: 40,
-                            required: true,
+                            required: editMode === 'add',
                         })}
                         onInput={(e) => (e.target.value = safeInput(e))}
                     />
@@ -160,7 +160,7 @@ export default function FormBook({ editMode }) {
                         {...register('description', {
                             minLength: 20,
                             maxLength: 100,
-                            required: true,
+                            required: editMode === 'add',
                         })}
                         onInput={(e) => (e.target.value = safeInput(e))}
                     />
@@ -182,7 +182,7 @@ export default function FormBook({ editMode }) {
                         placeholder="Дата написания*"
                         {...register('date', {
                             minLength: 10,
-                            required: true,
+                            required: editMode === 'add',
                         })}
                         onInput={(e) => formatInput(e, 'date')}
                     />
@@ -198,7 +198,7 @@ export default function FormBook({ editMode }) {
                         className="admin__form--input"
                         accept=".jpg, .jpeg, .png, .bmp, .tiff"
                         {...register('image', {
-                            required: true,
+                            required: editMode === 'add',
                         })}
                     />
                     <span
@@ -217,7 +217,7 @@ export default function FormBook({ editMode }) {
                         className="admin__form--input"
                         placeholder="Ссылка*"
                         {...register('link', {
-                            required: true,
+                            required: editMode === 'add',
                             pattern:
                                 /^https:\/\/(?:[a-zA-Zа-яА-ЯёЁ0-9-]+\.)*[a-zA-Zа-яА-ЯёЁ0-9-]+\.[a-zA-Zа-яА-ЯёЁ]{2,}(?:\/[^\s]*)?$/,
                         })}

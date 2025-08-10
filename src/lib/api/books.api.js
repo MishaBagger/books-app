@@ -4,9 +4,11 @@ export const booksApi = api.injectEndpoints({
     endpoints: (builder) => ({
         getBooks: builder.query({
             query: () => '/books',
-            providesTags: () => [{
-                type: 'Book'
-            }]
+            providesTags: () => [
+                {
+                    type: 'Book',
+                },
+            ],
         }),
         createBook: builder.mutation({
             query: (book) => ({
@@ -14,32 +16,43 @@ export const booksApi = api.injectEndpoints({
                 url: '/admin/book',
                 method: 'POST',
             }),
-            invalidatesTags: () => [{
-                type: 'Book'
-            }]
+            invalidatesTags: () => [
+                {
+                    type: 'Book',
+                },
+            ],
         }),
         updateBook: builder.mutation({
-            query: ({id, ...book}) => ({
-                body: book,
+            query: ({ id, formData }) => ({
+                body: formData,
                 url: `/admin/book/${id}`,
                 method: 'PATCH',
             }),
-            invalidatesTags: (result, error, { id }) => [{
-                type: 'Book',
-                id,
-            }]
+            invalidatesTags: (result, error, { id }) => [
+                {
+                    type: 'Book',
+                    // id
+                },
+            ],
         }),
         deleteBook: builder.mutation({
             query: (id) => ({
                 url: `/admin/book/${id}`,
                 method: 'DELETE',
             }),
-            invalidatesTags: (result, error, id) => [{
-                type: 'Book', 
-                id,
-            }]
+            invalidatesTags: (result, error, id) => [
+                {
+                    type: 'Book',
+                    // id
+                },
+            ],
         }),
     }),
 })
 
-export const { useGetBooksQuery, useCreateBookMutation, useUpdateBookMutation, useDeleteBookMutation } = booksApi
+export const {
+    useGetBooksQuery,
+    useCreateBookMutation,
+    useUpdateBookMutation,
+    useDeleteBookMutation,
+} = booksApi
