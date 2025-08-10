@@ -20,7 +20,7 @@ export default function Books() {
         [debouncedSearch]
     )
 
-    const { isLoading, isError } = useBooks()
+    const { isLoading, isError } = useBooks(true)
 
     const stableSort = useCallback((type) => sortBooks(type), [sortBooks])
 

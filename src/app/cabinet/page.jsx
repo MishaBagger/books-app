@@ -27,19 +27,17 @@ export default function Cabinet() {
     const [triggerAccessQuery, { data: accessData, isSuccess, isFetching }] =
         useLazyAccessQuery()
 
-    const [handleRegister, { data: registerData }] = useRegisterMutation()
-    const [handleLogin, { data: authData }] = useLoginMutation()
+    const [handleRegister] = useRegisterMutation()
+    const [handleLogin] = useLoginMutation()
     const [logoutFn] = useLogoutMutation()
 
     const { getAccessData, logoutUser, getUserData } = useActions()
 
-    useBooks()
+    useBooks(isAuth)
 
-    const isAdmin =
-        userData?.role === 'admin' &&
-        (registerData?.user?.role === 'admin' ||
-            authData?.user?.role === 'admin' ||
-            accessData?.user?.role === 'admin')
+    const isAdmin = userData?.role === 'admin'
+
+    const isUnauth = !isAuth && Object.keys(userData).length === 0 && !isFetching
 
     useEffect(() => {
         const storageToken = localStorage.getItem('token')
@@ -68,7 +66,7 @@ export default function Cabinet() {
                         : 'cabinet__container'
                 }
             >
-                {!isAuth && Object.keys(userData).length === 0 ? (
+                {isUnauth ? (
                     swap ? (
                         <Register
                             setSwap={setSwap}
@@ -82,9 +80,9 @@ export default function Cabinet() {
                             getUserData={getUserData}
                         />
                     )
-                ) : isFetching || !accessData ? (
+                ) : isFetching ? (
                     <p className="text">Проверка роли...</p>
-                ) : accessData?.user?.role === 'admin' ? (
+                ) : isAdmin ? (
                     <Admin logout={logout} />
                 ) : (
                     <User logout={logout} />

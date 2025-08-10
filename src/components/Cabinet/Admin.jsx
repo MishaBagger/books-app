@@ -12,9 +12,9 @@ export default function Admin({ logout }) {
             <h1 className="title">Админ-панель</h1>
             <div className="admin__container">
                 <div className="admin__wrapper">
-                    <p className="subtitle subtitle--admin text--admin">
+                    <h2 className="subtitle subtitle--admin text--admin">
                         Информация о сайте
-                    </p>
+                    </h2>
                     <p className="text text--admin">Посещений за всё время:</p>
                     <p className="text text--admin">Посещений за месяц:</p>
                     <p className="text text--admin">Переходов в магазин:</p>
@@ -30,9 +30,9 @@ export default function Admin({ logout }) {
                         Выйти из аккаунта
                     </button>
 
-                    <p className="subtitle subtitle--admin text--admin">
-                        Изменение контента:
-                    </p>
+                    <h2 className="subtitle subtitle--admin text--admin">
+                        Изменение контента
+                    </h2>
                     
                     <div className="admin__selectors">
                         <select

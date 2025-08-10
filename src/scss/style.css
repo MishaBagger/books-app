@@ -804,7 +804,6 @@ body.mobile {
   }
 }
 .cabinet__legend {
-  font-size: clamp(1rem, 1rem + 0.5vw, 2.5rem);
   text-align: center;
   color: #fefefe;
   font-family: var(--font-prata);

@@ -1,11 +1,11 @@
 import { createListenerMiddleware } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
-import { actions as errorActions } from '../error/error.slice'
+import { actions } from '../error/error.slice'
 
-export const listenerMiddleware = createListenerMiddleware()
+export const errorMiddleware = createListenerMiddleware()
 
-listenerMiddleware.startListening({
-    actionCreator: errorActions.addError,
+errorMiddleware.startListening({
+    actionCreator: actions.addError,
     effect: async (action, listenerApi) => {
         const { status, message } = action.payload
         const state = listenerApi.getState()

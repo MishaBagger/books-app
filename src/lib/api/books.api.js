@@ -22,7 +22,7 @@ export const booksApi = api.injectEndpoints({
             query: ({id, ...book}) => ({
                 body: book,
                 url: `/admin/book/${id}`,
-                method: 'PUT',
+                method: 'PATCH',
             }),
             invalidatesTags: (result, error, { id }) => [{
                 type: 'Book',

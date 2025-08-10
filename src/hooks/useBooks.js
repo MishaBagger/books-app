@@ -2,15 +2,18 @@ import { useGetBooksQuery } from '@/lib/api/books.api'
 import { useEffect } from 'react'
 import { useActions } from './useActions'
 
-export default function useBooks() {
-    const { data, isError, isLoading } = useGetBooksQuery()
+export default function useBooks(trigger = false) {
+    const { data, isError, isLoading } = useGetBooksQuery(undefined, {
+        skip: !trigger,
+    })
+
     const { getBooks } = useActions()
 
     useEffect(() => {
         if (data) {
             getBooks(data)
         }
-    }, [data])
+    }, [data, getBooks])
 
     return { isLoading, isError }
 }

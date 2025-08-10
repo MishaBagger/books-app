@@ -103,7 +103,7 @@ export default function FormBook({ editMode }) {
                     : deleteSubmit
             )}
         >
-            <legend className="cabinet__legend">
+            <legend className="cabinet__legend subtitle">
                 {{
                     add: 'Добавление',
                     update: 'Изменение',
