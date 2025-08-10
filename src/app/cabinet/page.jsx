@@ -13,6 +13,8 @@ import {
 import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import useBooks from '@/hooks/useBooks'
+import User from '@/components/Cabinet/User'
 const Admin = dynamic(() => import('@/components/Cabinet/Admin'), {
     ssr: false,
     loading: () => <AdminLoader />,
@@ -31,8 +33,10 @@ export default function Cabinet() {
 
     const { getAccessData, logoutUser, getUserData } = useActions()
 
+    useBooks()
+
     const isAdmin =
-        userData.role === 'admin' &&
+        userData?.role === 'admin' &&
         (registerData?.user?.role === 'admin' ||
             authData?.user?.role === 'admin' ||
             accessData?.user?.role === 'admin')
@@ -64,7 +68,7 @@ export default function Cabinet() {
                         : 'cabinet__container'
                 }
             >
-                {!isAuth && Object.keys(userData).length === 0 && !isFetching ? (
+                {!isAuth && Object.keys(userData).length === 0 ? (
                     swap ? (
                         <Register
                             setSwap={setSwap}
@@ -78,17 +82,12 @@ export default function Cabinet() {
                             getUserData={getUserData}
                         />
                     )
-                ) : userData?.role === undefined ? (
-                    <div>
-                        Загрузка
-                    </div>
-                ) : userData?.role === 'admin' ? (
+                ) : isFetching || !accessData ? (
+                    <p className="text">Проверка роли...</p>
+                ) : accessData?.user?.role === 'admin' ? (
                     <Admin logout={logout} />
                 ) : (
-                    <div>
-                        Кабинет юзера
-                        <button onClick={logout}>Logout</button>
-                    </div>
+                    <User logout={logout} />
                 )}
             </div>
         </section>

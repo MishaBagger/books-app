@@ -1,19 +1,34 @@
-import { useMemo } from 'react'
+import { useGetBooksQuery } from '@/lib/api/books.api'
+import { useEffect } from 'react'
+import { useActions } from './useActions'
 
-export const useBooks = (links) => {
-    return useMemo(() => {
-        return Object.entries(links)
-        .filter(([_, url]) => url)
-        .map(([platform, url]) => ({platform, url,displayName: getDisplayName(platform)}))
-    }, [links])
+export default function useBooks() {
+    const { data, isError, isLoading } = useGetBooksQuery()
+    const { getBooks } = useActions()
+
+    useEffect(() => {
+        if (data) {
+            getBooks(data)
+        }
+    }, [data])
+
+    return { isLoading, isError }
 }
 
-const getDisplayName = (platform) => {
-  const names = {
-    litres: 'Литрес',
-    wildberries: 'Wildberries',
-    ozon: 'Ozon',
-    market: 'Я.Маркет'
-  };
-  return names[platform] || platform;
-};
+// Коллбэк пересоздаётся -> в вызове нужна зависимость от коллбэка, иначе замыкание на undefined
+
+// import { useGetBooksQuery } from '@/lib/api/books.api'
+// import { useCallback } from 'react'
+// import { useActions } from './useActions'
+
+// export default function useBooks() {
+//     const { getBooks } = useActions()
+//     const { data, isError, isLoading } = useGetBooksQuery()
+
+//     const getBooksHook = useCallback(() => {if (data) getBooks(data)}, [data])
+
+//     return {
+//         getBooksHook,
+//         isLoading,
+//     }
+// }

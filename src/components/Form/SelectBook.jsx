@@ -13,7 +13,7 @@ export default function SelectBook({ setId, books }) {
                     <option key={books.id} value={books.id}>
                         #{books.id}
                         {': '}
-                        {books.image}
+                        {books.title}
                     </option>
                 ))}
         </select>

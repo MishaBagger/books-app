@@ -4,29 +4,25 @@ import { useSelector } from 'react-redux'
 import Book from './Book'
 import { useActions } from '@/hooks/useActions'
 import useDebounce from '@/hooks/useDebounce'
-import { useGetBooksQuery } from '@/lib/api/books.api'
 import BookLoader from './BookLoader'
 import { motion } from 'framer-motion'
+import useBooks from '@/hooks/useBooks'
 
 export default function Books() {
     const [searchTerm, setSearchTerm] = useState('')
     const [sortType, setSortType] = useState('date')
     const { filteredBooks } = useSelector((state) => state.books)
 
-    const { data: dataBooks, isError, isLoading } = useGetBooksQuery()
-
-    const { getBooks, searchBooks, sortBooks } = useActions()
+    const { searchBooks, sortBooks } = useActions()
     const debouncedSearch = useDebounce(searchBooks, 300)
     const stableDebouncedSearch = useMemo(
         () => debouncedSearch,
         [debouncedSearch]
     )
 
-    const stableSort = useCallback((type) => sortBooks(type), [sortBooks])
+    const { isLoading, isError } = useBooks()
 
-    useEffect(() => {
-        getBooks(dataBooks)
-    }, [dataBooks])
+    const stableSort = useCallback((type) => sortBooks(type), [sortBooks])
 
     useEffect(() => {
         stableSort(sortType)

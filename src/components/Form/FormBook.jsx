@@ -1,7 +1,7 @@
+import { useState, useEffect} from 'react'
+import { useForm } from 'react-hook-form'
 import useFormatInput from '@/hooks/useFormatInput'
 import useSafeInput from '@/hooks/useSafeInput'
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
 import SelectBook from './SelectBook'
 import { useSelector } from 'react-redux'
 import {
@@ -9,9 +9,19 @@ import {
     useDeleteBookMutation,
     useUpdateBookMutation,
 } from '@/lib/api/books.api'
+import formDataCreating from '@/utils/formDataCreating'
 
 export default function FormBook({ editMode }) {
     const { filteredBooks: books } = useSelector((state) => state.books)
+
+    const [id, setId] = useState('')
+
+    useEffect(() => {
+        setId('')
+    }, [editMode])
+
+    const formatInput = useFormatInput()
+    const safeInput = useSafeInput()
 
     const [createBook] = useCreateBookMutation()
     const [updateBook] = useUpdateBookMutation()
@@ -23,26 +33,14 @@ export default function FormBook({ editMode }) {
         handleSubmit,
         formState: { errors },
     } = useForm({ mode: 'onBlur' })
-    const [id, setId] = useState('')
-    const formatInput = useFormatInput()
-    const safeInput = useSafeInput()
 
     async function addSubmit(data) {
         try {
-            const formData = new FormData()
-            formData.append('title', data.title)
-            formData.append('description', data.description)
-            formData.append('date', data.date)
-            formData.append('link', data.link)
-            formData.append('platform', data.platform)
-            formData.append('image', data.image[0])
+            const formData = formDataCreating(data)
 
-            const response = await createBook(formData)
+            await createBook(formData).unwrap()
 
-            if (!response.error) {
-                reset()
-            }
-
+            reset()
         } catch (error) {
             console.log(
                 `Ошибка ${error?.status || error?.data?.status} в компоненте: ${
@@ -58,13 +56,12 @@ export default function FormBook({ editMode }) {
         try {
             if (!id) throw new Error('Не выбрана книга')
 
-            const response = await updateBook(data, id)
+            const formData = formDataCreating(data)
 
-            if (!response.error) {
-                reset()
-                setId('')
-            }
+            await updateBook(formData, id).unwrap()
 
+            reset()
+            setId('')
         } catch (error) {
             console.log(
                 `Ошибка ${error?.status || error?.data?.status} в компоненте: ${
@@ -80,12 +77,9 @@ export default function FormBook({ editMode }) {
         try {
             if (!id) throw new Error('Не выбрана книга')
 
-            const response = await deleteBook(id)
+            await deleteBook(id).unwrap()
 
-            if (!response.error) {
-                setId('')
-            }
-
+            setId('')
         } catch (error) {
             console.log(
                 `Ошибка ${error?.status || error?.data?.status} в компоненте: ${
@@ -256,7 +250,7 @@ export default function FormBook({ editMode }) {
             <button
                 className="admin__button"
                 type="submit"
-                disabled={editMode === 'delete' && !id}
+                disabled={(editMode === 'delete' || editMode === 'update') && !id}
             >
                 {{
                     add: 'Добавить',
