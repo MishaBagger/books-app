@@ -7,11 +7,14 @@ import useDebounce from '@/hooks/useDebounce'
 import BookLoader from './BookLoader'
 import { motion } from 'framer-motion'
 import useBooks from '@/hooks/useBooks'
+import { useGetApiQuery } from '@/lib/api/api'
 
 export default function Books() {
     const [searchTerm, setSearchTerm] = useState('')
     const [sortType, setSortType] = useState('date')
     const { filteredBooks } = useSelector((state) => state.books)
+
+    useGetApiQuery(undefined, {skip: typeof window === 'undefined'})
 
     const { searchBooks, sortBooks } = useActions()
     const debouncedSearch = useDebounce(searchBooks, 300)

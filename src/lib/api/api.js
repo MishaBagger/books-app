@@ -41,9 +41,7 @@ async function enhancedQuery(args, api, extraOptions) {
         }
 
         api.dispatch(errorActions.addError(errorData))
-    }
-
-    if ([200, 201].includes(result.meta.response.status)) {
+    } else if ([200, 201].includes(result.meta.response.status)) {
         const successData = {
             title: result.data.title || 'Успешно',
             description: result.data.description || 'Действие выполнено!',

@@ -79,6 +79,7 @@ export default function FormBook({ editMode }) {
 
             await deleteBook(id).unwrap()
 
+            e.target.reset()
             setId('')
         } catch (error) {
             console.log(
