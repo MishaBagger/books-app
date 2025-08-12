@@ -6,7 +6,7 @@ export const booksApi = api.injectEndpoints({
             query: () => '/books',
             providesTags: () => [
                 {
-                    type: 'Book',
+                    type: 'Books',
                 },
             ],
         }),
@@ -18,7 +18,7 @@ export const booksApi = api.injectEndpoints({
             }),
             invalidatesTags: () => [
                 {
-                    type: 'Book',
+                    type: 'Books',
                 },
             ],
         }),
@@ -30,7 +30,7 @@ export const booksApi = api.injectEndpoints({
             }),
             invalidatesTags: (result, error, { id }) => [
                 {
-                    type: 'Book',
+                    type: 'Books',
                     // id
                 },
             ],
@@ -42,7 +42,7 @@ export const booksApi = api.injectEndpoints({
             }),
             invalidatesTags: (result, error, id) => [
                 {
-                    type: 'Book',
+                    type: 'Books',
                     // id
                 },
             ],

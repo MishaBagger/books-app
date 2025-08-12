@@ -1,4 +1,4 @@
-import { useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import useFormatInput from '@/hooks/useFormatInput'
 import useSafeInput from '@/hooks/useSafeInput'
@@ -16,10 +16,6 @@ export default function FormBook({ editMode }) {
 
     const [id, setId] = useState('')
 
-    useEffect(() => {
-        setId('')
-    }, [editMode])
-
     const formatInput = useFormatInput()
     const safeInput = useSafeInput()
 
@@ -33,6 +29,10 @@ export default function FormBook({ editMode }) {
         handleSubmit,
         formState: { errors },
     } = useForm({ mode: 'onBlur' })
+
+    useEffect(() => {
+        setId('')
+    }, [editMode])
 
     async function addSubmit(data) {
         try {
@@ -73,7 +73,7 @@ export default function FormBook({ editMode }) {
         }
     }
 
-    async function deleteSubmit(_data, e) {
+    async function deleteSubmit(data, e) {
         try {
             if (!id) throw new Error('Не выбрана книга')
 
@@ -251,7 +251,9 @@ export default function FormBook({ editMode }) {
             <button
                 className="admin__button"
                 type="submit"
-                disabled={(editMode === 'delete' || editMode === 'update') && !id}
+                disabled={
+                    (editMode === 'delete' || editMode === 'update') && !id
+                }
             >
                 {{
                     add: 'Добавить',

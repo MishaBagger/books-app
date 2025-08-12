@@ -24,15 +24,17 @@ export default function Cabinet() {
     const [swap, setSwap] = useState(false)
     const { isAuth, userData, token } = useSelector((state) => state.user)
 
-    const [triggerAccessQuery, { data: accessData, isSuccess, isFetching }] =
+    const [triggerAccessQuery, { isSuccess, isFetching }] =
         useLazyAccessQuery()
 
     const [handleRegister] = useRegisterMutation()
     const [handleLogin] = useLoginMutation()
-    const [logoutFn] = useLogoutMutation()
+    const [handleLogout] = useLogoutMutation()
 
     const { getAccessData, logoutUser, getUserData } = useActions()
 
+    // Получение книг
+    console.log(isAuth)
     useBooks(isAuth)
 
     const isAdmin = userData?.role === 'admin'
@@ -42,18 +44,14 @@ export default function Cabinet() {
     useEffect(() => {
         const storageToken = localStorage.getItem('token')
         if (storageToken) {
-            triggerAccessQuery()
+            triggerAccessQuery().then((response)=> {
+                getAccessData(response.data)
+            })
         }
     }, [])
 
-    useEffect(() => {
-        if (accessData) {
-            getAccessData(accessData)
-        }
-    }, [accessData])
-
     async function logout() {
-        await logoutFn()
+        await handleLogout()
         logoutUser()
     }
 

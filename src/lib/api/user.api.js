@@ -21,6 +21,11 @@ export const userApi = api.injectEndpoints({
                 url: '/auth/access',
             }),
         }),
+        refresh: builder.query({
+            query: () => ({
+                url: '/auth/refresh'
+            })
+        }),
         logout: builder.mutation({
             query: () => ({
                 url: '/auth/logout',
@@ -30,4 +35,4 @@ export const userApi = api.injectEndpoints({
     }),
 })
 
-export const { useLoginMutation, useRegisterMutation, useLazyAccessQuery, useLogoutMutation } = userApi
+export const { useLoginMutation, useRegisterMutation, useLazyAccessQuery, useLogoutMutation, endpoints } = userApi

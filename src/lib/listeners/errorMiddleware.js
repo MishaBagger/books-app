@@ -1,23 +1,57 @@
 import { createListenerMiddleware } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
-import { actions } from '../error/error.slice'
+import { actions as errorActions } from '../error/error.slice'
+import { actions as userActions } from '../user/user.slice'
+import { endpoints as userEndpoints } from '../api/user.api'
 
 export const errorMiddleware = createListenerMiddleware()
 
 errorMiddleware.startListening({
-    actionCreator: actions.addError,
+    matcher: (action) => {
+        return (
+            errorActions.addError.match(action) ||
+            (action.type?.endsWith('/rejected') &&
+                action.payload?.status === 401)
+        )
+    },
     effect: async (action, listenerApi) => {
+        const { dispatch, getState } = listenerApi
+        const state = getState()
+
+        const error = action.payload
+
+        if (error.status === 401) {
+            try {
+                const refresh = await dispatch(userEndpoints.refresh.initiate()).unwrap()
+
+                if (refresh.data) {
+                    // Записываем в стейт пользователя свежие данные с рефреша
+                    dispatch(userActions.getUserData(refresh.data))
+                    return
+                } else {
+                    await userEndpoints.logout.initiate()(
+                        api.dispatch,
+                        api.getState
+                    )
+                    dispatch(userActions.logoutUser())
+                }
+            } catch (error) {
+                await dispatch(userEndpoints.logout.initiate())
+                dispatch(userActions.logoutUser())
+                return
+            }
+        }
+
         const { status, message } = action.payload
-        const state = listenerApi.getState()
         const lastError = state.error.lastError
 
         if (lastError) {
             toast.error(
                 <div className="toast">
                     <p className="subtitle subtitle--toast">
-                        Статус ошибки: {lastError.status}
+                        Статус ошибки: {lastError.status || status}
                     </p>
-                    <p className="text text--toast">{lastError.message}</p>
+                    <p className="text text--toast">{lastError.message || message}</p>
                 </div>,
                 {
                     toastId: 'apiError',

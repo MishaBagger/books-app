@@ -15,6 +15,15 @@ export default function useBooks(trigger = false) {
         }
     }, [data, getBooks])
 
+    // Хуки RTK Query мемоизируют параметры. Если skip был true при первом рендере, а затем стал false, запрос не запустится автоматически.
+    // Если данные уже есть в кэше (например, после предыдущего запроса), RTK Query не делает повторный запрос, даже если skip изменился.
+
+    // useEffect(() => {
+    //     if (trigger) {
+    //         refetch()
+    //     }
+    // }, [trigger])
+
     return { isLoading, isError }
 }
 

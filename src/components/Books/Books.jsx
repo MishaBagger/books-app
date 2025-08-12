@@ -14,6 +14,7 @@ export default function Books() {
     const [sortType, setSortType] = useState('date')
     const { filteredBooks } = useSelector((state) => state.books)
 
+    // Метрики посещений
     useGetApiQuery(undefined, {skip: typeof window === 'undefined'})
 
     const { searchBooks, sortBooks } = useActions()

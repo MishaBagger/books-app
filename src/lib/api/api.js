@@ -11,7 +11,7 @@ async function enhancedQuery(args, api, extraOptions) {
                 const token =
                     getState().user.token || localStorage.getItem('token')
                 if (token) {
-                    headers.set('Authorization', `Bearer ${token}`)
+                    headers.set('Authorization', `Bearer ${token?.replace(/[^\x00-\x7F]/g, '')}`)
                 }
             }
             return headers
@@ -30,12 +30,12 @@ async function enhancedQuery(args, api, extraOptions) {
 
         const errorData = {
             // Нету статуса - сетевая ошибка
-            status: error.status,
+            status: error?.status,
             // Ошибка сервера или БД
             message:
                 error.data?.message ||
                 error.data?.error ||
-                error.message ||
+                error?.message ||
                 'Неизвестная ошибка',
             ...apiData,
         }

@@ -26,8 +26,9 @@ export const userSlice = createSlice({
             }
         },
         logoutUser: (state, action) => {
-            Object.assign(state, initialState);
             localStorage.removeItem('token')
+            return initialState
+            
         }
     },
 })
