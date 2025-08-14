@@ -41,7 +41,7 @@ async function enhancedQuery(args, api, extraOptions) {
         }
 
         api.dispatch(errorActions.addError(errorData))
-    } else if ([200, 201].includes(result.meta.response.status)) {
+    } else if ([200, 201].includes(result.meta.response.status) && result.data.title && result.data.description) {
         const successData = {
             title: result.data.title || 'Успешно',
             description: result.data.description || 'Действие выполнено!',
@@ -55,7 +55,7 @@ async function enhancedQuery(args, api, extraOptions) {
 
 export const api = createApi({
     reducerPath: 'api',
-    tagTypes: ['Book'],
+    tagTypes: ['Books'],
     baseQuery: enhancedQuery,
     endpoints: (builder) => ({
         getApi: builder.query({

@@ -24,17 +24,9 @@ errorMiddleware.startListening({
             try {
                 const refresh = await dispatch(userEndpoints.refresh.initiate()).unwrap()
 
-                if (refresh.data) {
-                    // Записываем в стейт пользователя свежие данные с рефреша
-                    dispatch(userActions.getUserData(refresh.data))
-                    return
-                } else {
-                    await userEndpoints.logout.initiate()(
-                        api.dispatch,
-                        api.getState
-                    )
-                    dispatch(userActions.logoutUser())
-                }
+                // Записываем в стейт пользователя свежие данные с рефреша
+                dispatch(userActions.getUserData(refresh))
+                return
             } catch (error) {
                 await dispatch(userEndpoints.logout.initiate())
                 dispatch(userActions.logoutUser())
@@ -51,7 +43,9 @@ errorMiddleware.startListening({
                     <p className="subtitle subtitle--toast">
                         Статус ошибки: {lastError.status || status}
                     </p>
-                    <p className="text text--toast">{lastError.message || message}</p>
+                    <p className="text text--toast">
+                        {lastError.message || message}
+                    </p>
                 </div>,
                 {
                     toastId: 'apiError',

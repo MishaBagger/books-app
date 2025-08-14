@@ -34,7 +34,6 @@ export default function Cabinet() {
     const { getAccessData, logoutUser, getUserData } = useActions()
 
     // Получение книг
-    console.log(isAuth)
     useBooks(isAuth)
 
     const isAdmin = userData?.role === 'admin'

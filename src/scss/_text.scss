@@ -28,7 +28,7 @@
     }
 
     &--toast {
-        font-size: clamp(0.75rem, 0.6rem + 0.5vw, 1rem);
+        font-size: clamp(1rem, 0.6rem + 0.5vw, 1.25rem);
     }
 }
 
@@ -62,7 +62,7 @@
     }
 
     &--not-found {
-      font-size: clamp(0.75rem, 0.65rem + 0.2vw, 1rem);
+        font-size: clamp(0.75rem, 0.65rem + 0.2vw, 1rem);
     }
 
     &--first {
@@ -89,7 +89,7 @@
     }
 
     &--toast {
-        font-size: clamp(0.75rem, 0.65rem + 0.3vw, 1rem);
+        font-size: clamp(0.75rem, 0.65rem + 0.2vw, 1rem);
     }
 }
 
@@ -163,5 +163,10 @@
         &:hover {
             @include text-accent;
         }
+    }
+
+    &--cookie {
+        cursor: pointer;
+        font-family: var(--font-jost);
     }
 }

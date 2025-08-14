@@ -22,6 +22,7 @@ successMiddleware.startListening({
                 </div>,
                 {
                     toastId: lastSuccess.endpoint,
+                    autoClose: false
                 }
             )
         }

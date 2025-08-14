@@ -5,6 +5,7 @@ import StoreProvider from './StoreProvider'
 import Header from '@/components/Header/Header'
 import Footer from '@/components/Footer/Footer'
 import Main from '@/components/Main/Main'
+import Cookie from '@/components/Cookie/Cookie'
 
 const LoraFont = Lora({
     variable: '--font-lora',
@@ -36,6 +37,7 @@ export default function RootLayout({ children }) {
             >
                 <StoreProvider>
                     <Header />
+                    <Cookie />
                     <Main>{children}</Main>
                     <ToastContainer
                         position="top-right"

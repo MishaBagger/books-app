@@ -1,0 +1,40 @@
+.cookie {
+    width: 50%;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    border: 0.1rem solid #fb8159;
+    background: #fefefe;
+    z-index: 9000;
+
+    @media (max-width: 1192px) {
+        width: 70%;
+    }
+    @media (max-width: 768px) {
+        width: 80%;
+        padding: 1rem;
+    }
+
+    @media (max-width: 568px) {
+        width: 95%;
+        padding: 0.5rem;
+    }
+
+    &__wrapper {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        @media (max-width: 768px) {
+            flex-direction: column;
+        }
+        
+        @media (max-width: 568px) {
+            gap: 0.5rem;
+        }
+    }
+}
