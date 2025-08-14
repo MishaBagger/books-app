@@ -4,28 +4,25 @@ import { useSelector } from 'react-redux'
 import Book from './Book'
 import { useActions } from '@/hooks/useActions'
 import useDebounce from '@/hooks/useDebounce'
-import BookLoader from './BookLoader'
 import { motion } from 'framer-motion'
-import useBooks from '@/hooks/useBooks'
 import { useGetApiQuery, useLazyGetRedirectQuery } from '@/lib/api/api'
 
-export default function Books() {
+export default function Books({ initialBooks }) {
     const [searchTerm, setSearchTerm] = useState('')
     const [sortType, setSortType] = useState('date')
     const { filteredBooks } = useSelector((state) => state.books)
+    const [isHydrated, setIsHydrated] = useState(false)
 
     // Метрики посещений
-    useGetApiQuery(undefined, {skip: typeof window === 'undefined'})
+    useGetApiQuery(undefined, { skip: typeof window === 'undefined' })
     const [getRedirect] = useLazyGetRedirectQuery()
 
-    const { searchBooks, sortBooks } = useActions()
+    const { searchBooks, sortBooks, getBooks } = useActions()
     const debouncedSearch = useDebounce(searchBooks, 300)
     const stableDebouncedSearch = useMemo(
         () => debouncedSearch,
         [debouncedSearch]
     )
-
-    const { isLoading, isError } = useBooks(true)
 
     const stableSort = useCallback((type) => sortBooks(type), [sortBooks])
 
@@ -38,9 +35,29 @@ export default function Books() {
         return () => stableDebouncedSearch.cancel?.()
     }, [searchTerm, stableDebouncedSearch])
 
+    useEffect(() => {
+        if (initialBooks) {
+            getBooks(initialBooks)
+        }
+        setIsHydrated(true)
+    }, [])
+
+    const booksToRender = useMemo(() => {
+        // Для SEO и первого рендера используем initialBooks
+        if (!isHydrated && initialBooks) {
+            return initialBooks.sort(
+                (a, b) => new Date(b.date) - new Date(a.date)
+            )
+        }
+        // После гидрации используем данные из Redux
+        return filteredBooks
+    }, [filteredBooks, initialBooks, isHydrated])
+
     const renderedBooks = useMemo(() => {
-        return filteredBooks?.length ? (
-            filteredBooks.map((book) => <Book key={book.id} book={book} getRedirect={getRedirect}/>)
+        return booksToRender?.length ? (
+            booksToRender.map((book) => (
+                <Book key={book.id} book={book} getRedirect={getRedirect} />
+            ))
         ) : (
             <p className="text">
                 Книги не найдены, возможно они есть на{' '}
@@ -93,11 +110,25 @@ export default function Books() {
                 </select>
             </motion.div>
 
-            <div className="books__container">
-                {isLoading ? <BookLoader /> : renderedBooks}
-            </div>
+            <motion.div
+                initial={{ opacity: 0, y: 100 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+                className="books__container"
+            >
+                {renderedBooks}
+            </motion.div>
             <div className="books__next">
-                <button className="books__next__button">Загрузить ещё</button>
+                <motion.button
+                    initial={{ opacity: 0, y: 100 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    viewport={{ once: true }}
+                    className="books__next__button"
+                >
+                    Загрузить ещё
+                </motion.button>
             </div>
         </section>
     )

@@ -1,16 +1,19 @@
 import { useGetMetricsQuery } from '@/lib/api/admin.api'
 import dynamic from 'next/dynamic'
 import { useState, useMemo } from 'react'
+import Info from './Info'
 
 const FormBook = dynamic(() => import('@/components/Form/FormBook'), {
     ssr: false,
 })
-export default function Admin({ logout }) {
+export default function Admin({ userData, logout }) {
     const [select, setSelect] = useState()
     const [editMode, setEditMode] = useState('add')
 
     // Получение метрик
-    const { data } = useGetMetricsQuery(undefined, {skip: typeof window === 'undefined'})
+    const { data } = useGetMetricsQuery(undefined, {
+        skip: typeof window === 'undefined',
+    })
 
     const stats = useMemo(() => {
         if (!data) return null
@@ -37,30 +40,31 @@ export default function Admin({ logout }) {
             <h1 className="title">Админ-панель</h1>
             <div className="admin__container">
                 <div className="admin__wrapper">
-                    <h2 className="subtitle subtitle--admin text--admin">
+                    <Info userData={userData}/>
+                    <h2 className="subtitle subtitle--cabinet text--cabinet">
                         Информация о сайте
                     </h2>
-                    <p className="text text--admin">
+                    <p className="text text--cabinet">
                         Посещений за всё время:{' '}
                         {stats?.metrics?.visits?.all_time || 0}
                     </p>
-                    <p className="text text--admin">
+                    <p className="text text--cabinet">
                         Посещений за месяц:{' '}
                         {stats?.metrics?.visits?.monthly || 0}
                     </p>
-                    <p className="text text--admin">
+                    <p className="text text--cabinet">
                         Переходов в магазин за всё время:{' '}
                         {stats?.metrics?.redirects?.all_time || 0}
                     </p>
-                    <p className="text text--admin">
+                    <p className="text text--cabinet">
                         Переходов в магазин за месяц:{' '}
                         {stats?.metrics?.redirects?.monthly || 0}
                     </p>
-                    <p className="text text--admin">
+                    <p className="text text--cabinet">
                         Зарегистрировано пользователей за всё время:{' '}
                         {stats?.metrics?.registered_users?.all_time || 0}
                     </p>
-                    <p className="text text--admin">
+                    <p className="text text--cabinet">
                         Зарегистрировано пользователей за месяц:{' '}
                         {stats?.metrics?.registered_users?.monthly || 0}
                     </p>
@@ -73,7 +77,7 @@ export default function Admin({ logout }) {
                         Выйти из аккаунта
                     </button>
 
-                    <h2 className="subtitle subtitle--admin text--admin">
+                    <h2 className="subtitle subtitle--cabinet text--cabinet">
                         Изменение контента
                     </h2>
 
@@ -107,11 +111,11 @@ export default function Admin({ logout }) {
             </div>
             <div className="admin__container">
                 <div className="admin__wrapper">
-                    <h2 className="subtitle subtitle--admin text--admin">
+                    <h2 className="subtitle subtitle--cabinet text--cabinet">
                         Информация о книгах
                     </h2>
                     {stats?.redirects?.map((item) => (
-                        <p key={item.bookId} className="text text--admin">
+                        <p key={item.bookId} className="text text--cabinet">
                             Переходов у книги "{item.bookTitle}":{' '}
                             {item.redirectCount}
                         </p>

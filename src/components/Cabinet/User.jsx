@@ -1,8 +1,13 @@
-export default function User({logout}) {
+import Info from "./Info";
+
+export default function User({ userData, logout }) {
     return (
-        <div>
-            Кабинет юзера
-            <button onClick={logout}>Logout</button>
-        </div>
+        <section className="user">
+            <h1 className="title">Личный кабинет</h1>
+            <div className="user__container">
+                <Info userData={userData}/>
+                <button className="user__button" onClick={logout}>Выйти из аккаунта</button>
+            </div>
+        </section>
     )
 }

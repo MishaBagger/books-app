@@ -23,12 +23,13 @@
     font-size: clamp(0.875rem, 0.75rem + 1vw, 1.25rem);
     line-height: 1.8;
 
-    &--admin {
+    &--cabinet {
         text-align: center;
     }
 
     &--toast {
         font-size: clamp(1rem, 0.6rem + 0.5vw, 1.25rem);
+        line-height: 1.5;
     }
 }
 
@@ -84,7 +85,7 @@
         }
     }
 
-    &--admin {
+    &--cabinet {
         color: #fefefe;
     }
 

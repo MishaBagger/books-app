@@ -1,0 +1,36 @@
+.user {
+    width: 100%;
+    height: 100%;
+
+    &__container {
+        width: 100%;
+        height: 100%;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-radius: 0.5rem;
+        background-color: #fcbf93;
+    }
+
+    &__button {
+        @include input-text;
+        margin: 0.4rem auto;
+        padding: 0.4rem 1.5rem;
+        border-radius: 0.5rem;
+        background-color: #fb8159;
+        transition: background-color 0.5s ease;
+
+        &:hover {
+            background-color: #c45c34;
+        }
+
+        &:focus-visible {
+            outline: 2px solid #c45c34;
+        }
+
+        &:disabled {
+            cursor: default;
+            color: #fb8159;
+            background-color: #f2e8df;
+        }
+    }
+}

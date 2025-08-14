@@ -80,9 +80,9 @@ export default function Cabinet() {
                 ) : isFetching ? (
                     <p className="text">Проверка роли...</p>
                 ) : isAdmin ? (
-                    <Admin logout={logout} />
+                    <Admin userData={userData} logout={logout} />
                 ) : (
-                    <User logout={logout} />
+                    <User userData={userData} logout={logout} />
                 )}
             </div>
         </section>

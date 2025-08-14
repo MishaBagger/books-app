@@ -152,7 +152,7 @@ export default function FormBook({ editMode }) {
                         {errors.description?.type === 'minLength' &&
                             'Минимальная длина 20 символов'}
                         {errors.description?.type === 'maxLength' &&
-                            'Максимальная длина 100 символов'}
+                            'Максимальная длина 125 символов'}
                     </span>
                     <input
                         type="text"
@@ -160,7 +160,7 @@ export default function FormBook({ editMode }) {
                         placeholder="Описание*"
                         {...register('description', {
                             minLength: 20,
-                            maxLength: 100,
+                            maxLength: 125,
                             required: editMode === 'add',
                         })}
                         onInput={(e) => (e.target.value = safeInput(e))}

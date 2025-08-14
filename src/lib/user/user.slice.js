@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-        userData: {},
-        token: '',
-        isAuth: false,
-    }
+    userData: {},
+    token: '',
+    isAuth: false,
+}
 
 export const userSlice = createSlice({
     name: 'user',
@@ -18,6 +18,10 @@ export const userSlice = createSlice({
             localStorage.setItem('token', action.payload?.accessToken)
         },
         getAccessData: (state, action) => {
+            if (!action.payload) {
+                return initialState
+            }
+
             state.userData = action.payload?.user
             state.isAuth = true
 
@@ -28,8 +32,7 @@ export const userSlice = createSlice({
         logoutUser: (state, action) => {
             localStorage.removeItem('token')
             return initialState
-            
-        }
+        },
     },
 })
 
