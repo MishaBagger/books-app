@@ -41,7 +41,7 @@ errorMiddleware.startListening({
             toast.error(
                 <div className="toast">
                     <p className="subtitle subtitle--toast">
-                        Статус ошибки: {lastError.status || status}
+                        Ошибка: {lastError.status || status}
                     </p>
                     <p className="text text--toast">
                         {lastError.message || message}

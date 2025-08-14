@@ -20,6 +20,9 @@ export const booksApi = api.injectEndpoints({
                 {
                     type: 'Books',
                 },
+                {
+                    type: 'Metrics',
+                },
             ],
         }),
         updateBook: builder.mutation({
@@ -33,6 +36,9 @@ export const booksApi = api.injectEndpoints({
                     type: 'Books',
                     // id
                 },
+                {
+                    type: 'Metrics',
+                },
             ],
         }),
         deleteBook: builder.mutation({
@@ -44,6 +50,9 @@ export const booksApi = api.injectEndpoints({
                 {
                     type: 'Books',
                     // id
+                },
+                {
+                    type: 'Metrics',
                 },
             ],
         }),

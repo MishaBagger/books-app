@@ -10,14 +10,26 @@ export default function Admin({ logout }) {
     const [editMode, setEditMode] = useState('add')
 
     // Получение метрик
-    const { data } = useGetMetricsQuery()
+    const { data } = useGetMetricsQuery(undefined, {skip: typeof window === 'undefined'})
 
-    const metricsData = useMemo(() => {
-        return data?.reduce((acc, metric) => {
+    const stats = useMemo(() => {
+        if (!data) return null
+
+        // Обрабатываем метрики
+        const metrics = data.metrics.reduce((acc, metric) => {
             acc[metric.name] = acc[metric.name] || {}
             acc[metric.name][metric.period] = metric.value
             return acc
         }, {})
+
+        // Обрабатываем редиректы по книгам
+        const redirects = data.redirects.map((redirect) => ({
+            bookId: redirect.bookId,
+            bookTitle: redirect.Book.title,
+            redirectCount: redirect.value,
+        }))
+
+        return { metrics, redirects }
     }, [data])
 
     return (
@@ -30,26 +42,27 @@ export default function Admin({ logout }) {
                     </h2>
                     <p className="text text--admin">
                         Посещений за всё время:{' '}
-                        {metricsData?.visits?.all_time || 0}
+                        {stats?.metrics?.visits?.all_time || 0}
                     </p>
                     <p className="text text--admin">
-                        Посещений за месяц: {metricsData?.visits?.monthly || 0}
+                        Посещений за месяц:{' '}
+                        {stats?.metrics?.visits?.monthly || 0}
                     </p>
                     <p className="text text--admin">
                         Переходов в магазин за всё время:{' '}
-                        {metricsData?.redirects?.all_time || 0}
+                        {stats?.metrics?.redirects?.all_time || 0}
                     </p>
                     <p className="text text--admin">
                         Переходов в магазин за месяц:{' '}
-                        {metricsData?.redirects?.monthly || 0}
+                        {stats?.metrics?.redirects?.monthly || 0}
                     </p>
                     <p className="text text--admin">
                         Зарегистрировано пользователей за всё время:{' '}
-                        {metricsData?.registered_users?.all_time || 0}
+                        {stats?.metrics?.registered_users?.all_time || 0}
                     </p>
                     <p className="text text--admin">
                         Зарегистрировано пользователей за месяц:{' '}
-                        {metricsData?.registered_users?.monthly || 0}
+                        {stats?.metrics?.registered_users?.monthly || 0}
                     </p>
 
                     <button
@@ -90,6 +103,19 @@ export default function Admin({ logout }) {
                                 return <FormBook editMode={editMode} />
                         }
                     })()}
+                </div>
+            </div>
+            <div className="admin__container">
+                <div className="admin__wrapper">
+                    <h2 className="subtitle subtitle--admin text--admin">
+                        Информация о книгах
+                    </h2>
+                    {stats?.redirects?.map((item) => (
+                        <p key={item.bookId} className="text text--admin">
+                            Переходов у книги "{item.bookTitle}":{' '}
+                            {item.redirectCount}
+                        </p>
+                    ))}
                 </div>
             </div>
         </section>

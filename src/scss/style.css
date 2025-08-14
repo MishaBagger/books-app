@@ -882,6 +882,7 @@ body.mobile {
   justify-content: space-around;
   gap: 1rem;
   padding: 1rem;
+  margin-bottom: 1rem;
   border-radius: 0.5rem;
   background-color: #fcbf93;
 }

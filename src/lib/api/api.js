@@ -55,13 +55,16 @@ async function enhancedQuery(args, api, extraOptions) {
 
 export const api = createApi({
     reducerPath: 'api',
-    tagTypes: ['Books'],
+    tagTypes: ['Books', 'Metrics'],
     baseQuery: enhancedQuery,
     endpoints: (builder) => ({
         getApi: builder.query({
             query: () => '/',
         }),
+        getRedirect: builder.query({
+            query: (id) => `/redirect/${id}`
+        })
     }),
 })
 
-export const { useGetApiQuery } = api
+export const { useGetApiQuery, useLazyGetRedirectQuery } = api

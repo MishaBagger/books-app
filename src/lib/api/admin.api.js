@@ -6,6 +6,11 @@ export const adminApi = api.injectEndpoints({
             query: () => ({
                 url: '/admin/metrics',
             }),
+            providesTags: () => [
+                {
+                    type: 'Metrics',
+                },
+            ],
         }),
     }),
 })

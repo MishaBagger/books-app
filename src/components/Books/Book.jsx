@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-export default function Book({ book }) {
+export default function Book({ book, getRedirect }) {
     return (
         <div className="books__wrapper">
             <div className="books__top">
@@ -31,6 +31,7 @@ export default function Book({ book }) {
                     className="link link--book link--buy"
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={(e) => getRedirect(book.id)}
                 >
                     Читать
                 </a>

@@ -7,7 +7,7 @@ import useDebounce from '@/hooks/useDebounce'
 import BookLoader from './BookLoader'
 import { motion } from 'framer-motion'
 import useBooks from '@/hooks/useBooks'
-import { useGetApiQuery } from '@/lib/api/api'
+import { useGetApiQuery, useLazyGetRedirectQuery } from '@/lib/api/api'
 
 export default function Books() {
     const [searchTerm, setSearchTerm] = useState('')
@@ -16,6 +16,7 @@ export default function Books() {
 
     // Метрики посещений
     useGetApiQuery(undefined, {skip: typeof window === 'undefined'})
+    const [getRedirect] = useLazyGetRedirectQuery()
 
     const { searchBooks, sortBooks } = useActions()
     const debouncedSearch = useDebounce(searchBooks, 300)
@@ -39,7 +40,7 @@ export default function Books() {
 
     const renderedBooks = useMemo(() => {
         return filteredBooks?.length ? (
-            filteredBooks.map((book) => <Book key={book.id} book={book} />)
+            filteredBooks.map((book) => <Book key={book.id} book={book} getRedirect={getRedirect}/>)
         ) : (
             <p className="text">
                 Книги не найдены, возможно они есть на{' '}
