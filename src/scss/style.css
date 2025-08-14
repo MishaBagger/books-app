@@ -194,7 +194,7 @@ h1 {
 .title--book {
   font-family: var(--font-jost);
   font-weight: 500;
-  font-size: clamp(0.875rem, 0.7rem + 0.4vw, 1.25rem);
+  font-size: clamp(0.75rem, 0.7rem + 0.4vw, 1.25rem);
   line-height: 1.5;
   text-align: center;
   color: #fefefe;
@@ -202,7 +202,7 @@ h1 {
 
 .subtitle {
   font-family: var(--font-prata);
-  font-size: clamp(0.875rem, 0.75rem + 0.6vw, 1.25rem);
+  font-size: clamp(0.875rem, 0.75rem + 1vw, 1.25rem);
   line-height: 1.8;
 }
 .subtitle--admin {
@@ -1039,7 +1039,7 @@ body.mobile {
   right: 0;
   bottom: 0;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: 0.5rem;
   border: 0.1rem solid #fb8159;
   background: #fefefe;

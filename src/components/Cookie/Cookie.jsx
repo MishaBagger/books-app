@@ -13,9 +13,9 @@ export default function Cookie() {
         !accept && (
             <motion.div
                 className="cookie"
-                initial={{ opacity: 0, bottom: '2rem'}}
-                animate={{ opacity: 1, bottom: 0}}
-                transition={{ duration: 0.5, delay: 0.5 }}
+                initial={{ opacity: 0, bottom: '5rem'}}
+                animate={{ opacity: 1, bottom: '1.5rem'}}
+                transition={{ duration: 0.5}}
             >
                 <div className="cookie__wrapper">
                     <p className="text">

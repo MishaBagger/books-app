@@ -18,11 +18,10 @@ successMiddleware.startListening({
                         {title || lastSuccess.title}
                     </p>
                     <p className="text text--toast">{description || lastSuccess.description}</p>
-                    <p className="text text--toast">Debug: {lastSuccess.endpoint}</p>
+                    {/* <p className="text text--toast">Debug: {lastSuccess.endpoint}</p> */}
                 </div>,
                 {
                     toastId: lastSuccess.endpoint,
-                    autoClose: false
                 }
             )
         }
