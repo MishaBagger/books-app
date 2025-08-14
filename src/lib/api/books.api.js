@@ -10,6 +10,14 @@ export const booksApi = api.injectEndpoints({
                 },
             ],
         }),
+        loadMoreBooks: builder.query({
+            query: (page = 1) => `/books?page=${page}$limit=8`,
+            providesTags: () => [
+                {
+                    type: 'Books',
+                },
+            ],
+        }),
         createBook: builder.mutation({
             query: (book) => ({
                 body: book,
@@ -61,6 +69,7 @@ export const booksApi = api.injectEndpoints({
 
 export const {
     useGetBooksQuery,
+    useLoadMoreBooksQuery,
     useCreateBookMutation,
     useUpdateBookMutation,
     useDeleteBookMutation,

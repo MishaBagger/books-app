@@ -6,18 +6,34 @@ import { useActions } from '@/hooks/useActions'
 import useDebounce from '@/hooks/useDebounce'
 import { motion } from 'framer-motion'
 import { useGetApiQuery, useLazyGetRedirectQuery } from '@/lib/api/api'
+import { useLoadMoreBooksQuery } from '@/lib/api/books.api'
 
 export default function Books({ initialBooks }) {
+    const [page, setPage] = useState(initialBooks.totalPages - 1)
     const [searchTerm, setSearchTerm] = useState('')
     const [sortType, setSortType] = useState('date')
-    const { filteredBooks } = useSelector((state) => state.books)
     const [isHydrated, setIsHydrated] = useState(false)
+    const { filteredBooks } = useSelector((state) => state.books)
+
+    const { data } = useLoadMoreBooksQuery(page, { skip: page === 1 })
+
+    function loadMore() {
+        if (page < initialBooks.totalPages) {
+            setPage((prev) => prev + 1)
+        }
+    }
+
+    useEffect(() => {
+        if (data && page > 1) {
+            loadMoreBooks(data)
+        }
+    }, [data])
 
     // Метрики посещений
     useGetApiQuery(undefined, { skip: typeof window === 'undefined' })
     const [getRedirect] = useLazyGetRedirectQuery()
 
-    const { searchBooks, sortBooks, getBooks } = useActions()
+    const { searchBooks, sortBooks, getBooks, loadMoreBooks } = useActions()
     const debouncedSearch = useDebounce(searchBooks, 300)
     const stableDebouncedSearch = useMemo(
         () => debouncedSearch,
@@ -45,7 +61,7 @@ export default function Books({ initialBooks }) {
     const booksToRender = useMemo(() => {
         // Для SEO и первого рендера используем initialBooks
         if (!isHydrated && initialBooks) {
-            return initialBooks.sort(
+            return initialBooks.books.sort(
                 (a, b) => new Date(b.date) - new Date(a.date)
             )
         }
@@ -126,6 +142,8 @@ export default function Books({ initialBooks }) {
                     transition={{ duration: 0.5 }}
                     viewport={{ once: true }}
                     className="books__next__button"
+                    onClick={loadMore}
+                    disabled={page === initialBooks.totalPages}
                 >
                     Загрузить ещё
                 </motion.button>

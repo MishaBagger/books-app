@@ -10,8 +10,13 @@ export const booksSlice = createSlice({
     },
     reducers: {
         getBooks: (state, action) => {
-            state.allBooks = action.payload
-            state.filteredBooks = action.payload
+            state.allBooks = action.payload.books
+            state.filteredBooks = action.payload.books
+        },
+        loadMoreBooks: (state, action) => {
+            console.log(action)
+            state.allBooks.push(...action.payload.books)
+            state.filteredBooks.push(...action.payload.books)
         },
         searchBooks: (state, action) => {
             if (!state.filteredBooks || !state.allBooks) return

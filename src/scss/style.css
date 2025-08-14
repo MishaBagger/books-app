@@ -640,6 +640,7 @@ body.mobile {
   display: flex;
   flex-direction: column;
   border-radius: 0.5rem;
+  overflow: hidden;
   background-color: #fb8159;
 }
 .books__top {
@@ -685,6 +686,11 @@ body.mobile {
 }
 .books__next__button:hover {
   background-color: #fb8159;
+}
+.books__next__button:disabled {
+  cursor: default;
+  color: #fb8159;
+  background-color: #f2e8df;
 }
 
 .read {

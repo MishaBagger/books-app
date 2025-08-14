@@ -13,6 +13,7 @@ export default function Admin({ userData, logout }) {
     // Получение метрик
     const { data } = useGetMetricsQuery(undefined, {
         skip: typeof window === 'undefined',
+        refetchOnMountOrArgChange: true
     })
 
     const stats = useMemo(() => {
