@@ -1,4 +1,4 @@
-import { useGetMetricsQuery } from '@/lib/api/admin.api'
+import { useGetAdminMetricsQuery } from '@/lib/api/admin.api'
 import dynamic from 'next/dynamic'
 import { useState, useMemo } from 'react'
 import Info from './Info'
@@ -11,7 +11,7 @@ export default function Admin({ userData, logout }) {
     const [editMode, setEditMode] = useState('add')
 
     // Получение метрик
-    const { data } = useGetMetricsQuery(undefined, {
+    const { data } = useGetAdminMetricsQuery(undefined, {
         skip: typeof window === 'undefined',
         refetchOnMountOrArgChange: true
     })

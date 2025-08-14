@@ -3,16 +3,17 @@ import { useForm } from 'react-hook-form'
 import useFormatInput from '@/hooks/useFormatInput'
 import useSafeInput from '@/hooks/useSafeInput'
 import SelectBook from './SelectBook'
-import { useSelector } from 'react-redux'
 import {
     useCreateBookMutation,
     useDeleteBookMutation,
     useUpdateBookMutation,
 } from '@/lib/api/books.api'
 import formDataCreating from '@/utils/formDataCreating'
+import { useGetAdminBooksQuery } from '@/lib/api/admin.api'
 
 export default function FormBook({ editMode }) {
-    const { filteredBooks: books } = useSelector((state) => state.books)
+
+    const {data: books} = useGetAdminBooksQuery()
 
     const [id, setId] = useState('')
 
@@ -221,26 +222,6 @@ export default function FormBook({ editMode }) {
                             required: editMode === 'add',
                             pattern:
                                 /^https:\/\/(?:[a-zA-Zа-яА-ЯёЁ0-9-]+\.)*[a-zA-Zа-яА-ЯёЁ0-9-]+\.[a-zA-Zа-яА-ЯёЁ]{2,}(?:\/[^\s]*)?$/,
-                        })}
-                    />
-
-                    <span
-                        className="cabinet__error cabinet__error--white"
-                        aria-hidden={errors.platform?.type}
-                    >
-                        {!errors.platform &&
-                            !errors.platform?.type &&
-                            'По умолчанию - ЛитРес'}
-                        {errors.platform?.type === 'minLength' &&
-                            'Минимальная длина 5 символов'}
-                    </span>
-
-                    <input
-                        type="text"
-                        className="admin__form--input"
-                        placeholder="Платформа"
-                        {...register('platform', {
-                            minLength: 5,
                         })}
                     />
                 </>

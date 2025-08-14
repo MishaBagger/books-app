@@ -9,7 +9,7 @@ import { useGetApiQuery, useLazyGetRedirectQuery } from '@/lib/api/api'
 import { useLoadMoreBooksQuery } from '@/lib/api/books.api'
 
 export default function Books({ initialBooks }) {
-    const [page, setPage] = useState(initialBooks.totalPages - 1)
+    const [page, setPage] = useState(initialBooks.currentPage)
     const [searchTerm, setSearchTerm] = useState('')
     const [sortType, setSortType] = useState('date')
     const [isHydrated, setIsHydrated] = useState(false)

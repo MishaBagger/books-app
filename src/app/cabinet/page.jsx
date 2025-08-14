@@ -1,5 +1,4 @@
 'use client'
-
 import Login from '@/components/Cabinet/Login'
 import Register from '@/components/Cabinet/Register'
 import AdminLoader from '@/components/Cabinet/AdminLoader'
@@ -13,7 +12,6 @@ import {
 import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import useBooks from '@/hooks/useBooks'
 import User from '@/components/Cabinet/User'
 const Admin = dynamic(() => import('@/components/Cabinet/Admin'), {
     ssr: false,
@@ -32,9 +30,6 @@ export default function Cabinet() {
     const [handleLogout] = useLogoutMutation()
 
     const { getAccessData, logoutUser, getUserData } = useActions()
-
-    // Получение книг
-    useBooks(isAuth)
 
     const isAdmin = userData?.role === 'admin'
 

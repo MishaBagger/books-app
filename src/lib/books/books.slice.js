@@ -14,7 +14,6 @@ export const booksSlice = createSlice({
             state.filteredBooks = action.payload.books
         },
         loadMoreBooks: (state, action) => {
-            console.log(action)
             state.allBooks.push(...action.payload.books)
             state.filteredBooks.push(...action.payload.books)
         },

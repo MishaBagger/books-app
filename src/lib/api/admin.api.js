@@ -2,7 +2,7 @@ import { api } from './api'
 
 export const adminApi = api.injectEndpoints({
     endpoints: (builder) => ({
-        getMetrics: builder.query({
+        getAdminMetrics: builder.query({
             query: () => ({
                 url: '/admin/metrics',
             }),
@@ -12,7 +12,15 @@ export const adminApi = api.injectEndpoints({
                 },
             ],
         }),
+        getAdminBooks: builder.query({
+            query: () => '/admin/books',
+            providesTags: () => [
+                {
+                    type: 'Books',
+                },
+            ],
+        })
     }),
 })
 
-export const { useGetMetricsQuery } = adminApi
+export const { useGetAdminMetricsQuery, useGetAdminBooksQuery } = adminApi

@@ -11,7 +11,7 @@ export const booksApi = api.injectEndpoints({
             ],
         }),
         loadMoreBooks: builder.query({
-            query: (page = 1) => `/books?page=${page}$limit=8`,
+            query: (page = 1) => `/books?page=${page}$limit=10`,
             providesTags: () => [
                 {
                     type: 'Books',
