@@ -3,6 +3,7 @@ import useSafeInput from '@/hooks/useSafeInput'
 import ReCAPTCHA from 'react-google-recaptcha'
 import useCaptcha from '@/hooks/useCaptcha'
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 
 export default function Login({ setSwap, handleLogin, getUserData }) {
     const {
@@ -28,12 +29,21 @@ export default function Login({ setSwap, handleLogin, getUserData }) {
 
             getUserData(response)
         } catch (error) {
-            console.log(`Ошибка ${error?.status || error?.data?.status} в компоненте: ${error?.message || error?.data?.message || 'Неизвестная ошибка'}`)
+            console.log(
+                `Ошибка ${error?.status || error?.data?.status} в компоненте: ${
+                    error?.message ||
+                    error?.data?.message ||
+                    'Неизвестная ошибка'
+                }`
+            )
         }
     }
 
     return (
-        <form
+        <motion.form
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
             className="cabinet__register"
             method="POST"
             onSubmit={handleSubmit(onSubmit)}
@@ -95,6 +105,6 @@ export default function Login({ setSwap, handleLogin, getUserData }) {
                 Ещё нет аккаунта?{' '}
                 <span onClick={(e) => setSwap((prev) => !prev)}>Создать</span>
             </p>
-        </form>
+        </motion.form>
     )
 }

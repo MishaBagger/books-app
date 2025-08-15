@@ -1,6 +1,7 @@
 import { useGetAdminMetricsQuery } from '@/lib/api/admin.api'
 import dynamic from 'next/dynamic'
 import { useState, useMemo } from 'react'
+import { motion } from 'framer-motion'
 import Info from './Info'
 
 const FormBook = dynamic(() => import('@/components/Form/FormBook'), {
@@ -13,7 +14,7 @@ export default function Admin({ userData, logout }) {
     // Получение метрик
     const { data } = useGetAdminMetricsQuery(undefined, {
         skip: typeof window === 'undefined',
-        refetchOnMountOrArgChange: true
+        refetchOnMountOrArgChange: true,
     })
 
     const stats = useMemo(() => {
@@ -38,10 +39,22 @@ export default function Admin({ userData, logout }) {
 
     return (
         <section className="admin">
-            <h1 className="title">Админ-панель</h1>
-            <div className="admin__container">
+            <motion.h1
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+                className="title"
+            >
+                Админ-панель
+            </motion.h1>
+            <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+                className="admin__container"
+            >
                 <div className="admin__wrapper">
-                    <Info userData={userData}/>
+                    <Info userData={userData} />
                     <h2 className="subtitle subtitle--cabinet text--cabinet">
                         Информация о сайте
                     </h2>
@@ -109,8 +122,13 @@ export default function Admin({ userData, logout }) {
                         }
                     })()}
                 </div>
-            </div>
-            <div className="admin__container">
+            </motion.div>
+            <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="admin__container"
+            >
                 <div className="admin__wrapper">
                     <h2 className="subtitle subtitle--cabinet text--cabinet">
                         Информация о книгах
@@ -122,7 +140,7 @@ export default function Admin({ userData, logout }) {
                         </p>
                     ))}
                 </div>
-            </div>
+            </motion.div>
         </section>
     )
 }

@@ -4,6 +4,7 @@ import useFormatInput from '@/hooks/useFormatInput'
 import ReCAPTCHA from 'react-google-recaptcha'
 import useCaptcha from '@/hooks/useCaptcha'
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 
 export default function Register({ setSwap, handleRegister, getUserData }) {
     const {
@@ -35,7 +36,10 @@ export default function Register({ setSwap, handleRegister, getUserData }) {
     }
 
     return (
-        <form
+         <motion.form
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
             className="cabinet__register"
             method="POST"
             onSubmit={handleSubmit(onSubmit)}
@@ -180,6 +184,6 @@ export default function Register({ setSwap, handleRegister, getUserData }) {
                 Уже есть аккаунт?{' '}
                 <span onClick={(e) => setSwap((prev) => !prev)}>Войти</span>
             </p>
-        </form>
+        </motion.form>
     )
 }
