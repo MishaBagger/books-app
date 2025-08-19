@@ -13,7 +13,6 @@ export default function useSafeInput() {
             .replace(/\)/g, '') // )
             .replace(/[\/\\|]/g, '') // \ | /
             .replace(/%/g, '') // %
-            .replace(/\?/g, '') // ?
             .replace(/\^/g, '') // ^
             .replace(/php/g, '') // Удаляет php
             .replace(/src/g, '') // Удаляет src

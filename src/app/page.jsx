@@ -5,7 +5,9 @@ import Read from '@/components/Read/Read'
 
 async function getBooksSSR() {
     try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/books`)
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/books`, {
+            next: { revalidate: 3600 },
+        })
 
         if (!res.ok) {
             throw new Error(`HTTP error! status: ${res.status}`)
