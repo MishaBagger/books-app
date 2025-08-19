@@ -1,7 +1,9 @@
 import { Lora, Jost, Prata } from 'next/font/google'
+import { GoogleAnalytics } from '@next/third-parties/google'
 import { ToastContainer } from 'react-toastify'
 import '../scss/style.css'
 import StoreProvider from './StoreProvider'
+import YandexMetrika from '@/components/Analytics/YandexMetrika'
 import Header from '@/components/Header/Header'
 import Footer from '@/components/Footer/Footer'
 import Main from '@/components/Main/Main'
@@ -54,6 +56,8 @@ export default function RootLayout({ children }) {
                     />
                     <Footer />
                 </StoreProvider>
+                <YandexMetrika ymId="103803045"/>
+                <GoogleAnalytics gaId="G-ZZG358W58B" />
             </body>
         </html>
     )

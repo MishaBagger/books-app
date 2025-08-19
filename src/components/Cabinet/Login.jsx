@@ -93,7 +93,7 @@ export default function Login({ setSwap, handleLogin, getUserData }) {
             />
 
             <ReCAPTCHA
-                sitekey="6Lcl4x8rAAAAALreUu4J3osZrzEYq7DQNl4KjpDN"
+                sitekey="6Ld6J6srAAAAALLedmi0xdY0zjwDT-Qvs4Lis-sN"
                 onChange={handleCaptcha}
             />
 

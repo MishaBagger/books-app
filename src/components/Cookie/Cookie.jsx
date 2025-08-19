@@ -20,7 +20,7 @@ export default function Cookie() {
                 <div className="cookie__wrapper">
                     <p className="text">
                         Наш сайт использует файлы cookie для хранения данных. Пользуясь сайтом, вы даете свое
-                        согласие с <a href="#" className='link link--accent link--cookie'>Политикой конфиденциальности</a>
+                        согласие с <a href="/Обработка персональных данных.pdf" target='_blank' className='link link--accent link--cookie'>Обработкой персональных данных</a>
                     </p>
                     <span
                         className="link link--accent link--cookie"
