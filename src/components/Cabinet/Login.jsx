@@ -4,6 +4,8 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import useCaptcha from '@/hooks/useCaptcha'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { useActions } from '@/hooks/useActions'
+import throwComponentError from '@/utils/throwComponentError'
 
 export default function Login({ setSwap, handleLogin, getUserData }) {
     const {
@@ -13,29 +15,25 @@ export default function Login({ setSwap, handleLogin, getUserData }) {
     } = useForm({ mode: 'onBlur' })
     const safeInput = useSafeInput()
 
+    const { addError } = useActions()
     const [recaptcha, setRecaptcha] = useState(null)
     const handleCaptcha = useCaptcha(setRecaptcha)
 
     async function onSubmit(data, e) {
-        e.preventDefault()
-        if (!recaptcha) {
-            throw new Error('Капча не пройдена!')
-        }
-
         try {
+            e.preventDefault()
+
+            if (!recaptcha) {
+                throw new Error('Капча не пройдена!')
+            }
+
             const authData = { ...data, recaptcha }
 
             const response = await handleLogin(authData).unwrap()
 
             getUserData(response)
         } catch (error) {
-            console.log(
-                `Ошибка ${error?.status || error?.data?.status} в компоненте: ${
-                    error?.message ||
-                    error?.data?.message ||
-                    'Неизвестная ошибка'
-                }`
-            )
+            addError(throwComponentError(error))
         }
     }
 

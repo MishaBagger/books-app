@@ -5,6 +5,8 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import useCaptcha from '@/hooks/useCaptcha'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { useActions } from '@/hooks/useActions'
+import throwComponentError from '@/utils/throwComponentError'
 
 export default function Register({ setSwap, handleRegister, getUserData }) {
     const {
@@ -15,28 +17,30 @@ export default function Register({ setSwap, handleRegister, getUserData }) {
     const formatInput = useFormatInput()
     const safeInput = useSafeInput()
 
+    const { addError } = useActions()
     const [recaptcha, setRecaptcha] = useState(null)
     const handleCaptcha = useCaptcha(setRecaptcha)
 
     async function onSubmit(data, e) {
-        e.preventDefault()
-        if (!recaptcha) {
-            throw new Error('Капча не пройдена!')
-        }
-
         try {
+            e.preventDefault()
+
+            if (!recaptcha) {
+                throw new Error('Капча не пройдена!')
+            }
+
             const registerData = { ...data, recaptcha }
 
             const response = await handleRegister(registerData).unwrap()
 
             getUserData(response)
         } catch (error) {
-            console.log(`Ошибка ${error?.status || error?.data?.status} в компоненте: ${error?.message || error?.data?.message || 'Неизвестная ошибка'}`)
+            addError(throwComponentError(error))
         }
     }
 
     return (
-         <motion.form
+        <motion.form
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
