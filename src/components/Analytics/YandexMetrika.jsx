@@ -4,18 +4,30 @@ import { useEffect } from 'react';
 
 export default function YandexMetrika({ ymId }) {
   useEffect(() => {
+    // Не трекать в dev-режиме
+    if (process.env.NODE_ENV !== 'production') return;
+
+    // Проверяем, есть ли уже скрипт
+    if (window.ym) return;
+
+    // Создаем очередь вызовов, если её нет
+    window.ym = window.ym || function() {
+      (window.ym.a = window.ym.a || []).push(arguments);
+    };
+    window.ym.l = +new Date;
 
     // Загрузка скрипта
     const script = document.createElement('script');
     script.src = 'https://mc.yandex.ru/metrika/tag.js';
     script.async = true;
 
-    // Инициализация
+    // Инициализация после загрузки
     script.onload = () => {
-      window.ym(ymId, 'init', { 
-        clickmap: true, 
+      window.ym(ymId, 'init', {
+        clickmap: true,
         trackLinks: true,
-        accurateTrackBounce: true
+        accurateTrackBounce: true,
+        webvisor: true
       });
     };
 

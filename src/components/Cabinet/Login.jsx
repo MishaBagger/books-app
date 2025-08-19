@@ -13,17 +13,17 @@ export default function Login({ setSwap, handleLogin, getUserData }) {
     } = useForm({ mode: 'onBlur' })
     const safeInput = useSafeInput()
 
-    const [recaptchaToken, setRecaptchaToken] = useState(null)
-    const handleCaptcha = useCaptcha(setRecaptchaToken)
+    const [recaptcha, setRecaptcha] = useState(null)
+    const handleCaptcha = useCaptcha(setRecaptcha)
 
     async function onSubmit(data, e) {
         e.preventDefault()
-        // if (!recaptchaToken) {
-        //     throw new Error('Капча не пройдена!')
-        // }
+        if (!recaptcha) {
+            throw new Error('Капча не пройдена!')
+        }
 
         try {
-            const authData = { ...data, recaptchaToken }
+            const authData = { ...data, recaptcha }
 
             const response = await handleLogin(authData).unwrap()
 
