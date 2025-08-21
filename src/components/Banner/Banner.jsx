@@ -12,7 +12,7 @@ export default function Banner() {
         >
             <Image
                 className="banner__image"
-                src={'/banner.png'}
+                src={'/banner.jpg'}
                 fill
                 priority
                 quality={85}

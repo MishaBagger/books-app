@@ -61,9 +61,7 @@ export default function Books({ initialBooks }) {
     const booksToRender = useMemo(() => {
         // Для SEO и первого рендера используем initialBooks
         if (!isHydrated && initialBooks) {
-            return initialBooks.books.sort(
-                (a, b) => new Date(b.date) - new Date(a.date)
-            )
+            return initialBooks.books
         }
         // После гидрации используем данные из Redux
         return filteredBooks
