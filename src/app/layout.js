@@ -45,7 +45,7 @@ export const metadata = {
         siteName: 'Наталья Калинина - официальный сайт',
         images: [
             {
-                url: '/og-banner.jpg',
+                url: '/og-image.png',
                 width: 1200,
                 height: 630,
                 alt: 'Наталья Калинина - автор книг',
